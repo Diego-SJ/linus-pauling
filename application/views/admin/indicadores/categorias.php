@@ -11,8 +11,8 @@
     </section>
 
     <section class="content">
-        <form id="frmSubmitAch" class="row" method="POST" action="<?php echo site_url('Web/Indicadores/save')?>">
-            <div class="col-lg-5 col-md-12">
+        <form id="catForm" class="row">
+            <div class="col-lg-4 col-md-12">
                 <div class="box box-solid">
                     <div class="box-header bg-primary text-white">
                           <h3 class="box-title"><i class="fa fa-pie-chart"></i> Agregar categoría</h3>
@@ -21,24 +21,32 @@
                         <div>    
                             <!-- name -->
                             <div class="form-group">
-                                <label for="achName" class="col-form-label"><i class="fa fa-filter text-azuld"></i> Nombre de la categoría <b class="text-red">*</b></label>
-                                <input type="text" id="catName" name="achName" class="form-control req irna" placeholder="" required>
+                                <input type="text" id="catId" name="catId" class="form-control question_hide" hidden="hidden">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="catName" class="col-form-label"><i class="fa fa-filter text-azuld"></i> Nombre de la categoría <b class="text-red">*</b></label>
+                                <input type="text" id="catName" name="catName" class="form-control req irna" placeholder="" required>
                             </div>
 
                             <!-- description -->
                             <div class="form-group">
-                                <label for="achDescription" class="col-form-label"><i class="fa fa-file-text text-azuld"></i> Descripción <b class="text-red">*</b></label>
-                                <textarea type="text" id="acatDescription" name="achDescription" class="form-control req irna" placeholder="" required></textarea>
+                                <label for="catDescription" class="col-form-label"><i class="fa fa-file-text text-azuld"></i> Descripción <b class="text-red">*</b></label>
+                                <textarea type="text" id="catDescription" name="catDescription" style="height: 300px;" class="form-control req irna" placeholder="" required></textarea>
                             </div>
                             <!-- btn save -->
                             <div class="form-group">
-                                <button id="checkFormAchievement" type="submit" class="btn bg-verde btn-block"><b>Guardar</b></button>
+                                <button id="checkFormCategory" type="submit" class="btn bg-verde btn-block"><b>Guardar</b></button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-7">
+            <div class="col-lg-8">
+                <div id="deletesuccess" class="alert alert-success alert-dismissible" hidden="true">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <span class="response"></span><br>
+                </div>
                 <?php 
                 if(!empty($this->session->flashdata("error"))){
                     echo "<div class='alert alert-danger alert-dismissible'>
@@ -54,22 +62,13 @@
                 } 
                 ?>
                 <table class="table table-bordered bg-white table-hover text-center">
-                    <tbody>
-                        <tr>
-                            <th class="bg-gray">#</th>
-                            <th class="bg-gray">Categoría</th>
-                            <th class="bg-gray">Descripcioón</th>
-                            <th class="bg-gray">Acciones</th>
-                        </tr>
-                        <?php 
-                        $indice = 1; 
-                        if(!empty($categories)){ 
-                        foreach($categories as $category){ ?>
-                        <tr>
-                            <td><?php echo $indice; ?></td>
-                            <td><?php echo $category->nombre ?></td>
-                            <td><?php echo $category->descripcion ?></td>
-                        </tr>
+                    <tr>
+                        <th class="bg-gray">#</th>
+                        <th class="bg-gray">Categoría</th>
+                        <th class="bg-gray">Descripcioón</th>
+                        <th class="bg-gray" style="width: 150px;">Acciones</th>
+                    </tr>
+                    <tbody id="body-cat">
                     </tbody>
                 </table>
             </div>
@@ -77,14 +76,3 @@
     </section>
 
 </div>
-
-<script>
-    $(function (){
-        // $("#frmSubmitAch").submit(function(e){
-        //     if($('input[type=checkbox]:checked').length === 0) {
-        //         e.preventDefault();
-        //         alert('Debe seleccionar al menos un alumno.');
-        //     }
-        // });
-    })
-</script>

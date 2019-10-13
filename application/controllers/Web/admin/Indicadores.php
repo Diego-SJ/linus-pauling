@@ -13,41 +13,65 @@ class Indicadores extends CI_Controller {
     }
 
     public function index(){
-        $id_usuario =  $this->session->userdata('USER_ID');
-          
-        $data = array(
-            'categories' => $this->indicadores_model->getAdminCategories(), 
-        );
-
         $this->load->view('admin/layouts/header');
-        $this->load->view('admin/indicadores/categorias',$data);
+        $this->load->view('admin/indicadores/categorias');
         $this->load->view('admin/layouts/footer');
     }
 
+    public function getAllCategories(){
+        $id_usuario =  $this->session->userdata('USER_ID');
+        $data = $this->Indicadores_model->getAdminCategories($id_usuario);
+        echo $data;
+    }
+
     public function save(){
-        try {
-            $id_usuario =  $this->session->userdata('USER_ID');
+        if(isset($_POST['name']) && isset($_POST['description'])){
             $success = false;
+            $id_usuario =  $this->session->userdata('USER_ID');
             $data = array(
-                'nombre'      => $this->input->post("catName"),
-                'descripcion' => $this->input->post("acatDescription"),
+                'nombre'      => $_POST['name'],
+                'descripcion' => $_POST['description'],
                 'idUsuario'   => $id_usuario,
             );
             
             if($this->Indicadores_model->saveCategory($data)){
-                $success = true;
+                echo "Categoría regristrada correctamente.";
             } 
-            
-            if($success){
-                $this->session->set_flashdata('success', 'Categoría regristrada correctamente.');  
-                redirect(base_url().'Web/admin/Indicadores'); 
-            } else {
-                $this->session->set_flashdata('error', 'Ocurrio un error, intenta más tarde.');  
-                redirect(base_url().'Web/admin/Indicadores'); 
+        }
+    }
+
+    public function edit(){
+        try {
+            if(isset($_POST['id'])){
+                $category = $this->Indicadores_model->getCategoryById($_POST['id']);
+                echo $category;
             }
         } catch (\Throwable $th) {
-            $this->session->set_flashdata('error', $th.'');  
+            echo $th;
+        }
+    }
+
+    public function delete($idCategoria){
+        if($this->Indicadores_model->deleteCategory($idCategoria)){
+            $this->session->set_flashdata('success', 'Categoría eliminada.');  
             redirect(base_url().'Web/admin/Indicadores'); 
+        } else {
+            $this->session->set_flashdata('error', 'Ocurrió un error, intenta más tarde.');  
+            redirect(base_url().'Web/admin/Indicadores'); 
+        }
+    }
+
+    public function update(){
+        if(isset($_POST['name']) && isset($_POST['description']) && isset($_POST['id'])){
+            $success = false;
+            $data = array(
+                'nombre'      => $_POST['name'],
+                'descripcion' => $_POST['description'],
+            );
+            $id = $_POST['id'];
+            if($this->Indicadores_model->updateCategory($data,$id)){
+                echo "Categoría actualziada correctamente.";
+            } 
         }
     }
 }
