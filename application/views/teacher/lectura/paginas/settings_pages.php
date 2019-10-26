@@ -200,3 +200,26 @@
 
     </section>
 </div>
+
+<script>
+$(function(){
+  document.querySelector("html").classList.add('js');
+
+  var fileInput  = document.querySelector(".input-file"),  
+      btn     = document.querySelector(".input-file-trigger"),
+      the_return = document.querySelector(".file-return");
+        
+      btn.addEventListener("keydown", function( event ) {  
+      if ( event.keyCode == 13 || event.keyCode == 32 ) {  
+          fileInput.focus();  
+      }  
+  });
+  btn.addEventListener( "click", function( event ) {
+    fileInput.focus();
+    return false;
+  });  
+  fileInput.addEventListener( "change", function( event ) {  
+      the_return.innerHTML = this.value;  
+  }); 
+});
+</script>

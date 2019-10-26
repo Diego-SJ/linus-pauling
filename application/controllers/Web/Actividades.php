@@ -13,6 +13,7 @@ class Actividades extends CI_Controller {
         $this->load->model("Web/Lectura_model");
         $this->load->model("Web/Actividad_model");
         $this->load->model("Movil/Lectura_modelo");
+        $this->load->model("Web/admin/Indicadores_model");
         if($this->session->userdata('USER_ID') == '' || $this->session->userdata('USER_TYPE') != '2') {  
             redirect(base_url().'Welcome');  
         } 
@@ -23,6 +24,33 @@ class Actividades extends CI_Controller {
                               ** INICIO CONTROLLER REACTIVOS **
     ===================================================================================*/
 
+    // VISTA ALL ACTIVITIES
+    public function activities($id_lectura){
+        $id_usuario = $this->session->userdata('USER_ID'); 
+        if($this->Lectura_model->getLectura($id_lectura) ){
+            $data = array(
+                'detail_lectura' => $this->Lectura_model->getLectura($id_lectura),
+            );
+
+            $dataCategories = array(
+                'categories'     => $this->Indicadores_model->getCategories(),
+            );
+
+            $this->load->view('layouts/header');
+            $this->load->view('teacher/lectura/header_detail',$data);
+            $this->load->view('teacher/lectura/actividades/settings_reactivos',$dataCategories);
+            $this->load->view('layouts/footer');
+        } else {
+            redirect(base_url()."Web/Lecturas");
+        } 
+    }
+
+    public function getAllReactivesByLecture($idLectura){
+        $idUsuario = $this->session->userdata('USER_ID');
+        $data = $this->Actividad_model->getActivitiesLecturaJson($idLectura,$idUsuario);
+        echo $data;
+    }
+
     // VISTA ELIMINAR
     public function viewEliminarReactivo($id_actividad){
         $data = array( 'data_actividad' => $this->Actividad_model->getActividad($id_actividad) );
@@ -31,7 +59,7 @@ class Actividades extends CI_Controller {
 
 
     // ELIMINAR ACTIVIDAD
-    public function eliminarActivity($id_pagina){
+    public function eliminarActivity(){
         $id_lectura = $this->input->post("id_lectura_dr");
         $id_actividad = $this->input->post("id_actividad_dr");
         $id_om = $this->input->post("id_om_dr");
@@ -99,7 +127,8 @@ class Actividades extends CI_Controller {
             $id_om = $data->idOpcionMultiple;
             $om_array = array(
                 'opc_m' => $this->Actividad_model->getReactivoOpMul($id_om),
-                'id_lectura' => $this->Actividad_model->getActividad($id_reactivo)
+                'id_lectura' => $this->Actividad_model->getActividad($id_reactivo),
+                'categories'     => $this->Indicadores_model->getCategories(),
             );
             $this->load->view("teacher/lectura/actividades/edit-om", $om_array);
         }
@@ -108,7 +137,8 @@ class Actividades extends CI_Controller {
             $id_vf = $data->idVerdaderoFalso;
             $vf_array = array(
                 'ver_f' => $this->Actividad_model->getReactivoVerFal($id_vf),
-                'id_lectura' => $this->Actividad_model->getActividad($id_reactivo)
+                'id_lectura' => $this->Actividad_model->getActividad($id_reactivo),
+                'categories'     => $this->Indicadores_model->getCategories(),
             );
             $this->load->view("teacher/lectura/actividades/edit-vf", $vf_array);
         }
@@ -117,47 +147,27 @@ class Actividades extends CI_Controller {
             $id_rc = $data->idRelacionarColumnas;
             $rc_array = array(
                 'rel_c' => $this->Actividad_model->getReactivoRelCol($id_rc),
-                'id_lectura' => $this->Actividad_model->getActividad($id_reactivo)
+                'id_lectura' => $this->Actividad_model->getActividad($id_reactivo),
+                'categories'     => $this->Indicadores_model->getCategories(),
             );
             $this->load->view("teacher/lectura/actividades/edit-rc", $rc_array);
         }
-    }
-
-    // VISTA ALL ACTIVITIES
-    public function activities($id_lectura){
-        $id_usuario = $this->session->userdata('USER_ID'); 
-        if($this->Lectura_model->getLectura($id_lectura) ){
-            $data = array(
-                'detail_lectura' => $this->Lectura_model->getLectura($id_lectura) 
-            );
-
-            $reactivosLectura = array (
-                'reactivos' => $this->Actividad_model->getActivitiesLectura($id_lectura,$id_usuario)
-            );
-
-            $this->load->view('layouts/header');
-            $this->load->view('teacher/lectura/header_detail',$data);
-            $this->load->view('teacher/lectura/actividades/settings_reactivos',$reactivosLectura);
-            $this->load->view('layouts/footer');
-        } else {
-            redirect(base_url()."Web/Lecturas");
-        } 
     }
 
     // agregar opcion multiple
     public function addOpcionMultiple($id){
         //traer datos del formulario
         $id_usuario = $this->session->userdata('USER_ID'); 
-        $id_lectura = $id;
+        $id_lectura = $this->input->post("idLectura");
         $id_auxiliar   = uniqid();
-        $tipo_reactivo = $this->input->post("tr_om");
 
-        $pregunta   = $this->input->post("fom_pregunta");
-        $resp_1     = $this->input->post("fom_resp1");
-        $resp_2     = $this->input->post("fom_resp2");
-        $resp_3     = $this->input->post("fom_resp3");
-        $resp_4     = $this->input->post("fom_resp4");
-        $correcto   = $this->input->post("fom_resp_chk");
+        $categoria  = $this->input->post("categoria");
+        $pregunta   = $this->input->post("pregunta");
+        $resp_1     = $this->input->post("resp1");
+        $resp_2     = $this->input->post("resp2");
+        $resp_3     = $this->input->post("resp3");
+        $resp_4     = $this->input->post("resp4");
+        $correcto   = $this->input->post("resp_correct");
 
         //guardar datos en array (clave,valor)
         $data = array (
@@ -168,6 +178,7 @@ class Actividades extends CI_Controller {
             'resp_3'   => $resp_3,
             'resp_4'   => $resp_4,
             'resp_correcta' => $correcto,
+            'idCategoria'   => $categoria,
             'idLectura'     => $id_lectura,
             'idUsuario'     => $id_usuario
         );
@@ -178,17 +189,20 @@ class Actividades extends CI_Controller {
             //traer id de la pregunta
             if($idOP = $this->Actividad_model->traerId($id_auxiliar,"OpcionMultiple")){
                 $data_om = array (
-                    'idActividad'          => $tipo_reactivo,
+                    'idActividad'          => 1,
                     'idLectura'            => $id_lectura,
                     'idOpcionMultiple'     => $idOP->idOpcionMultiple,
                     'idVerdaderoFalso'     => "",
                     'idRelacionarColumnas' => "",
+                    'idCategoria'          => $categoria,
                     'idUsuario'            => $id_usuario
                 );
                 //insertar la actividad en la tabla relacionada
                 if($this->Actividad_model->publicarActividad($data_om)){
                     if($this->checkEnableActivities($id_lectura,1)){
-                        redirect(base_url()."Web/Actividades/activities/".$id_lectura);
+                        echo "Ok";
+                    } else {
+                        echo "Error";
                     }
                 }
             }
@@ -197,13 +211,14 @@ class Actividades extends CI_Controller {
 
     // actualizar om
     public function updateOM($id_om){
+        $id_lectura   = $this->input->post("idLectura");
+        $idCategoria   = $this->input->post("ec_om");
         $pregunta   = $this->input->post("fom_pregunta");
         $resp_1     = $this->input->post("fom_resp1");
         $resp_2     = $this->input->post("fom_resp2");
         $resp_3     = $this->input->post("fom_resp3");
         $resp_4     = $this->input->post("fom_resp4");
         $correcto   = $this->input->post("fom_resp_chk");
-        $id_lectura   = $this->input->post("idLectura");
 
         //guardar datos en array (clave,valor)
         $data = array (
@@ -212,7 +227,8 @@ class Actividades extends CI_Controller {
             'resp_2'   => $resp_2,
             'resp_3'   => $resp_3,
             'resp_4'   => $resp_4,
-            'resp_correcta' => $correcto
+            'resp_correcta' => $correcto,
+            'idCategoria' => $idCategoria,
         );
 
         if($this->Actividad_model->updateOpcMul($data,$id_om)){
@@ -228,23 +244,24 @@ class Actividades extends CI_Controller {
         $id_usuario = $this->session->userdata('USER_ID'); 
         $id_lectura    = $id;
         $id_auxiliar   = uniqid();
-        $tipo_reactivo = $this->input->post("tr_rc");
 
+        //categoria
+        $categoria  = $this->input->post("categoria");
         // //oraciones
-        $frc_o1     = $this->input->post("frc_o1");
-        $frc_o2     = $this->input->post("frc_o2");
-        $frc_o3     = $this->input->post("frc_o3");
-        $frc_o4     = $this->input->post("frc_o4");
+        $frc_o1     = $this->input->post("oracion1");
+        $frc_o2     = $this->input->post("oracion2");
+        $frc_o3     = $this->input->post("oracion3");
+        $frc_o4     = $this->input->post("oracion4");
         //index de respuesta
-        $frc_slc1   = $this->input->post("frc_slc1");
-        $frc_slc2   = $this->input->post("frc_slc2");
-        $frc_slc3   = $this->input->post("frc_slc3");
-        $frc_slc4   = $this->input->post("frc_slc4");
+        $frc_slc1   = $this->input->post("res_slc1");
+        $frc_slc2   = $this->input->post("res_slc2");
+        $frc_slc3   = $this->input->post("res_slc3");
+        $frc_slc4   = $this->input->post("res_slc4");
         //respuestas
-        $frc_r1     = $this->input->post("frc_r1");  
-        $frc_r2     = $this->input->post("frc_r2");  
-        $frc_r3     = $this->input->post("frc_r3");  
-        $frc_r4     = $this->input->post("frc_r4");    
+        $frc_r1     = $this->input->post("resp1");  
+        $frc_r2     = $this->input->post("resp2");  
+        $frc_r3     = $this->input->post("resp3");  
+        $frc_r4     = $this->input->post("resp4");    
 
         // //guardar datos en array (clave,valor)
         $data = array (
@@ -261,6 +278,7 @@ class Actividades extends CI_Controller {
             'resp_2' => $frc_r2,
             'resp_3' => $frc_r3,
             'resp_4' => $frc_r4,
+            'idCategoria'     => $categoria,
             'idLectura'  => $id_lectura,
             'idUsuario'     => $id_usuario
         );
@@ -271,26 +289,34 @@ class Actividades extends CI_Controller {
             //traer id de la pregunta
             if($idRC = $this->Actividad_model->traerId($id_auxiliar,"RelacionarColumnas")){
                 $data_rc = array (
-                    'idActividad'          => $tipo_reactivo,
+                    'idActividad'          => 3,
                     'idLectura'            => $id_lectura,
                     'idOpcionMultiple'     => "",
                     'idVerdaderoFalso'     => "",
                     'idRelacionarColumnas' => $idRC->idRelacionarColumnas,
+                    'idCategoria'          => $categoria,
                     'idUsuario'            => $id_usuario
                 );
                 //insertar la actividad en la tabla relacionada
                 if($this->Actividad_model->publicarActividad($data_rc)){
                     if($this->checkEnableActivities($id_lectura,3)){
-                        redirect(base_url()."Web/Actividades/activities/".$id_lectura);
+                        echo "Ok";
+                    } else {
+                        echo "no se inserto en la tabla relacionada";
                     }
                 }
+            } else {
+                echo 'no se trajo el id';
             }
-        }  
+        } else {
+            echo 'no se inserto';
+        }
     }
 
     public function updateRC($id_rc){
         //traer datos del formulario
         $id_lectura   = $this->input->post("idLectura");
+        $idCategoria   = $this->input->post("ec_rc");
 
         // //oraciones
         $frc_o1     = $this->input->post("frc_o1");
@@ -321,7 +347,8 @@ class Actividades extends CI_Controller {
             'resp_1' => $frc_r1,
             'resp_2' => $frc_r2,
             'resp_3' => $frc_r3,
-            'resp_4' => $frc_r4
+            'resp_4' => $frc_r4,
+            'idCategoria' => $idCategoria,
         );
 
         // //verificar la insercion del reactivo de tipo rc
@@ -335,20 +362,21 @@ class Actividades extends CI_Controller {
     // verdadero o falso
     public function addVerdaderoFalso($id){
         //traer datos del formulario
-        $id_usuario = $this->session->userdata('USER_ID'); 
-        $id_lectura    = $id;
-        $id_auxiliar   = uniqid();
-        $tipo_reactivo = $this->input->post("tr_vf");
+        $id_usuario  = $this->session->userdata('USER_ID'); 
+        $id_lectura  = $id;
+        $id_auxiliar = uniqid();
 
         // oraciones - respuesta
-        $fvf_or     = $this->input->post("fvf_or");
-        $fvf_slc     = $this->input->post("fvf_slc");   
+        $categoria = $this->input->post("categoria");
+        $fvf_or    = $this->input->post("pregunta");
+        $fvf_slc   = $this->input->post("resp_correct");   
 
         // //guardar datos en array (clave,valor)
         $data = array (
             'id_aux'        => $id_auxiliar,
             'pregunta'      => $fvf_or,
             'resp_correcta' => $fvf_slc,
+            'idCategoria'     => $categoria, 
             'idLectura'     => $id_lectura,
             'idUsuario'     => $id_usuario
         );
@@ -359,17 +387,20 @@ class Actividades extends CI_Controller {
             //traer id de la pregunta
             if($idRC = $this->Actividad_model->traerId($id_auxiliar,"VerdaderoFalso")){
                 $data_vf = array (
-                    'idActividad'          => $tipo_reactivo,
+                    'idActividad'          => 2,
                     'idLectura'            => $id_lectura,
                     'idOpcionMultiple'     => "",
                     'idVerdaderoFalso'     => $idRC->idVerdaderoFalso,
                     'idRelacionarColumnas' => "",
+                    'idCategoria'          => $categoria,
                     'idUsuario'            => $id_usuario
                 );
                 //insertar la actividad en la tabla relacionada
                 if($this->Actividad_model->publicarActividad($data_vf)){
                     if($this->checkEnableActivities($id_lectura,2)){
-                        redirect(base_url()."Web/Actividades/activities/".$id_lectura);
+                        echo "Ok";
+                    } else {
+                        echo "Error";
                     }
                 }
             }
@@ -379,7 +410,7 @@ class Actividades extends CI_Controller {
     public function updateVF($id_vf){
         //traer datos del formulario
         $id_lectura   = $this->input->post("idLectura");
-
+        $idCategoria   = $this->input->post("ec_vf");
         // oraciones - respuesta
         $fvf_or     = $this->input->post("fvf_or");
         $fvf_slc     = $this->input->post("fvf_slc");   
@@ -387,7 +418,8 @@ class Actividades extends CI_Controller {
         // //guardar datos en array (clave,valor)
         $data = array (
             'pregunta' => $fvf_or,
-            'resp_correcta' => $fvf_slc
+            'resp_correcta' => $fvf_slc,
+            'idCategoria' => $idCategoria,
         );
 
         // //verificar la insercion del reactivo de tipo rc

@@ -98,12 +98,16 @@ class Actividades extends CI_Controller {
 				$id_om = $this->input->post("idrom".$i);
 				$p_om  = $this->input->post("question".$i);
 				$r_om  = $this->input->post("resp".$i);
+				$status= $this->input->post("status_".$i);
+				$idCategoria = $this->input->post("idcat".$i);
 
 				$questionsTestArray [] = array(
 					"idOpcionMultiple" => $id_om, 
 					"answer" => ($r_om == '')?'sin responder':$r_om, 
+					"status"           => ($r_om == $status)?'correct':'incorrect',
 					"idAlumno" => $id_alumno,
 					"idLectura" => $id_lectura,
+					"idCategoria" => $idCategoria,
 				);
 
 				$test_result = $test_result."
@@ -114,6 +118,8 @@ class Actividades extends CI_Controller {
 				if($r_om == ''){
 					$test_result = $test_result.
 					"<input class=\"question_hide\" value=\"".$r_om."\" name=\"resp".$i."\" hidden='hidden'>
+					<input class=\"question_hide\" value=\"".$status."\" name=\"status_".$i."\" hidden='hidden'>
+					<input class=\"question_hide\" value=\"".$idCategoria."\" name=\"idcat".$i."\" hidden='hidden'>
 					<h4 class=\"no-padding-bottom text-rojo\"><b class=\"respuesta\">".$p_om."</b></h4>
 					<div id=\"sdd\" class=\" no-padding-top\">
 					<p>
@@ -126,6 +132,8 @@ class Actividades extends CI_Controller {
 				} else if($this->Actividades_modelo->checkReactiveOM($id_om,$r_om)){
 					$test_result = $test_result. 
 					"<input class=\"question_hide\" value=\"".$r_om."\" name=\"resp".$i."\" hidden='hidden'>
+					<input class=\"question_hide\" value=\"".$status."\" name=\"status_".$i."\" hidden='hidden'>
+					<input class=\"question_hide\" value=\"".$idCategoria."\" name=\"idcat".$i."\" hidden='hidden'>
 					<h4 class=\"no-padding-bottom text-green\"><b class=\"respuesta\">".$p_om."</b></h4>
 					<div id=\"sdd\" class=\" no-padding-top\">
 					<p>
@@ -138,6 +146,8 @@ class Actividades extends CI_Controller {
 				} else {
 					$test_result = $test_result.
 					"<input class=\"question_hide\" value=\"".$r_om."\" name=\"resp".$i."\" hidden='hidden'>
+					<input class=\"question_hide\" value=\"".$status."\" name=\"status_".$i."\" hidden='hidden'>
+					<input class=\"question_hide\" value=\"".$idCategoria."\" name=\"idcat".$i."\" hidden='hidden'>
 					<h4 class=\"no-padding-bottom text-rojo\"><b class=\"respuesta\">".$p_om."</b></h4>
 					<div id=\"sdd\" class=\" no-padding-top\">
 					<p>
@@ -203,6 +213,7 @@ class Actividades extends CI_Controller {
 				$p_vf  = $this->input->post("question_".$i);
 				$r_vf  = $this->input->post("resp_".$i);
 				$status= $this->input->post("status_".$i);
+				$idCategoria= $this->input->post("idcat".$i);
 
 				$questionsTestArray [] = array(
 					"idVerdaderoFalso" => $id_vf, 
@@ -211,6 +222,7 @@ class Actividades extends CI_Controller {
 					"status"           => ($r_vf == $status)?'correct':'incorrect',
 					"idAlumno"         => $id_alumno,
 					"idLectura"        => $id_lectura,
+					"idCategoria"        => $idCategoria,
 				);
 
 				$test_result = $test_result."
@@ -223,6 +235,7 @@ class Actividades extends CI_Controller {
 					"<input class=\"question_hide\" value=\"".$p_vf."\" name=\"question_".$i."\" hidden='hidden'>
 					<input class=\"question_hide\" value=\"".$r_vf."\" name=\"resp_".$i."\" hidden='hidden'>
 					<input class=\"question_hide\" value=\"".$status."\" name=\"status_".$i."\" hidden='hidden'>
+					<input class=\"question_hide\" value=\"".$idCategoria."\" name=\"idcat".$i."\" hidden='hidden'>
 					<h4 class=\"no-padding-bottom text-rojo\"><b class=\"respuesta\">".$p_vf."</b></h4>
 					<div id=\"sdd\" class=\" no-padding-top\">
 					<p>
@@ -237,6 +250,7 @@ class Actividades extends CI_Controller {
 					"<input class=\"question_hide\" value=\"".$p_vf."\" name=\"question_".$i."\" hidden='hidden'>
 					<input class=\"question_hide\" value=\"".$r_vf."\" name=\"resp_".$i."\" hidden='hidden'>
 					<input class=\"question_hide\" value=\"".$status."\" name=\"status_".$i."\" hidden='hidden'>
+					<input class=\"question_hide\" value=\"".$idCategoria."\" name=\"idcat".$i."\" hidden='hidden'>
 					<h4 class=\"no-padding-bottom text-green\"><b class=\"respuesta\">".$p_vf."</b></h4>
 					<div id=\"sdd\" class=\" no-padding-top\">
 					<p>
@@ -251,6 +265,7 @@ class Actividades extends CI_Controller {
 					"<input class=\"question_hide\" value=\"".$p_vf."\" name=\"question_".$i."\" hidden='hidden'>
 					<input class=\"question_hide\" value=\"".$r_vf."\" name=\"resp_".$i."\" hidden='hidden'>
 					<input class=\"question_hide\" value=\"".$status."\" name=\"status_".$i."\" hidden='hidden'>
+					<input class=\"question_hide\" value=\"".$idCategoria."\" name=\"idcat".$i."\" hidden='hidden'>
 					<h4 class=\"no-padding-bottom text-rojo\"><b class=\"respuesta\">".$p_vf."</b></h4>
 					<div id=\"sdd\" class=\" no-padding-top\">
 					<p>
@@ -313,11 +328,13 @@ class Actividades extends CI_Controller {
 
 			for ($i=1; $i <= $num_reactivos ; $i++) { 
 				$id_rc  = $this->input->post("idrrc".$i);
+				$idCategoria = $this->input->post("idcat".$i);
 
 				$test_result = $test_result."
 				<div class=\"padding-square-no-top-bottom\">
 				<blockquote class=\"no-padding bg-block-gray\">
-				<input class=\"question_hide\" value=\"".$id_rc."\" name=\"idrrc".$i."\" hidden='hidden'>";
+				<input class=\"question_hide\" value=\"".$id_rc."\" name=\"idrrc".$i."\" hidden='hidden'>
+				<input class=\"question_hide\" value=\"".$idCategoria."\" name=\"idcat".$i."\" hidden='hidden'>";
 				
 				for($j = 1 ; $j <= 4 ;$j++){
 					$question   = $this->input->post("question_".$i."_".$j);
@@ -325,6 +342,7 @@ class Actividades extends CI_Controller {
 					$idx_r  = $this->input->post("r_".$i."_".$j);
 					$answer_alumno  = $this->input->post("rt_".$i."_".$j);
 					$status = ($idx_p == $idx_r)?'correct':'incorrect';
+					
 
 					$questionsTestArray [] = array(
 						"idRelacionarColumnas" => $id_rc, 
@@ -333,6 +351,7 @@ class Actividades extends CI_Controller {
 						"status_".$i."_".$j   => $status,
 						"idAlumno"     => $id_alumno,
 						"idLectura"    => $id_lectura,
+						"idCategoria"    => $idCategoria,
 					);
 
 					if($answer_alumno == ''){
@@ -600,8 +619,10 @@ class Actividades extends CI_Controller {
 						$data = array (
 							'idOpcionMultiple' => $answer['idOpcionMultiple'],
 							'answer'           => $answer['answer'],
+							'status'           => $answer['status'],
 							'idAlumno'         => $answer['idAlumno'],
 							'idLectura'        => $answer['idLectura'],
+							'idCategoria'        => $answer['idCategoria'],
 						);
 						if($this->Actividades_modelo->saveAnswersOm($data)){
 							$success = true;
@@ -627,6 +648,7 @@ class Actividades extends CI_Controller {
 					$sta4 = ($answers[$i]['item_'.($i+1)][3]['status_'.($i+1).'_4']);
 					$idAl = ($answers[$i]['item_'.($i+1)][0]['idAlumno']);
 					$idLec = ($answers[$i]['item_'.($i+1)][0]['idLectura']);
+					$idCategoria = ($answers[$i]['item_'.($i+1)][0]['idCategoria']);
 
 					$data = array(
 						'idRelacionarColumnas' => $idRc,
@@ -644,6 +666,7 @@ class Actividades extends CI_Controller {
 						'status_4'             => $sta4,
 						'idAlumno'             => $idAl,
 						'idLectura'            => $idLec,
+						'idCategoria'          => $idCategoria,
 					);
 					if($this->Actividades_modelo->saveAnswersRc($data)){
 						unset($data);
@@ -662,6 +685,7 @@ class Actividades extends CI_Controller {
 						'status'           => $answer['status'],
 						'idAlumno'         => $answer['idAlumno'],
 						'idLectura'        => $answer['idLectura'],
+						'idCategoria'        => $answer['idCategoria'],
 					);
 					if($this->Actividades_modelo->saveAnswersVf($data)){
 						unset($data);
@@ -684,6 +708,7 @@ class Actividades extends CI_Controller {
 			"answer"           => "null", 
 			"idAlumno"         => "null",
 			"idLectura"        => "null",
+			"idCategoria"      => "null",
 		);
 
 		$num_reactivos  = $this->input->post("num_r");
@@ -691,12 +716,16 @@ class Actividades extends CI_Controller {
 			$id_om = $this->input->post("idrom".$i);
 			$p_om  = $this->input->post("question".$i);
 			$r_om  = $this->input->post("resp".$i);
+			$status= $this->input->post("status_".$i);
+			$idCategoria = $this->input->post("idcat".$i);
 
 			$questionsTestArray [] = array(
 				"idOpcionMultiple" => $id_om, 
 				"answer"           => ($r_om != '')?$r_om:'sin responder', 
+				"status"           => ($r_om == $status)?'correct':'incorrect',
 				"idAlumno"         => $id_alumno,
 				"idLectura"        => $id_lectura,
+				"idCategoria"      => $idCategoria,
 			);
 		}
 		if($this->saveAnswersStudent(json_encode($questionsTestArray),'om')){
@@ -710,7 +739,6 @@ class Actividades extends CI_Controller {
 	public function finishTestRc($id_lectura){
 		$id_alumno   = $this->session->userdata('USER_ID');
 
-
 		$num_reactivos  = $this->input->post("num_r");
 		for ($i=1; $i <= $num_reactivos ; ++$i) { 
 
@@ -720,6 +748,7 @@ class Actividades extends CI_Controller {
 				$question  = $this->input->post("question_".$i."_".$j);
 				$answer    = $this->input->post("rt_".$i."_".$j);
 				$status    = $this->input->post("status_".$i."_".$j);
+				$idCategoria = $this->input->post("idcat".$i);
 
 				$questionsTestArray [] = array(
 					"idRelacionarColumnas" => $id_rc, 
@@ -728,6 +757,7 @@ class Actividades extends CI_Controller {
 					"status_".$i."_".$j   => $status,
 					"idAlumno"     => $id_alumno,
 					"idLectura"    => $id_lectura,
+					"idCategoria"    => $idCategoria,
 				);
 			}
 			$arrayRelacionarColumnas [] = array(
@@ -753,6 +783,7 @@ class Actividades extends CI_Controller {
 			$p_vf  = $this->input->post("question_".$i);
 			$r_vf  = $this->input->post("resp_".$i);
 			$status= $this->input->post("status_".$i);
+			$idCategoria = $this->input->post("idcat".$i);
 
 			$questionsTestArray [] = array(
 				"idVerdaderoFalso" => $id_vf, 
@@ -761,6 +792,7 @@ class Actividades extends CI_Controller {
 				"status"           => ($r_vf == $status)?'correct':'incorrect',
 				"idAlumno"         => $id_alumno,
 				"idLectura"        => $id_lectura,
+				'idCategoria'      => $idCategoria,
 			);
 		}
 		if($this->saveAnswersStudent(json_encode($questionsTestArray),'vf')){

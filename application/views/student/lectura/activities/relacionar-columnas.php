@@ -112,7 +112,8 @@
                     <?php $total_items++; ?>
                     <?php $sub_index = 1; //indice para el numero de pregunta?>
 
-                    <?php echo "<input class='question_hide' value='".$reactivo->idRelacionarColumnas."' name='idrrc".$total_items."' hidden>"; //id de la fila relacionar columnas?>
+                    <?php echo "<input class='question_hide' value='".$reactivo->idRelacionarColumnas."' name='idrrc".$total_items."' hidden>";?>
+                    <?php echo "<input class='question_hide' value='".$reactivo->idCategoria."' name='idcat".$total_items."' hidden>";?>
 
                     <blockquote class="area-arrastre<?php echo $index; ?> bg-block-gray">
                       <table style="width: 100%;">

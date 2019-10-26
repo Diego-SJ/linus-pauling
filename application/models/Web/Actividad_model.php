@@ -16,6 +16,22 @@ class Actividad_model extends CI_Model {
         return $resultado->result();
     }
 
+    function getActivitiesLecturaJson($idLectura,$idUsuario){
+        $this->db->where('idLectura',$idLectura);
+        $this->db->where('idUsuario',$idUsuario);
+        $this->db->order_by("categoria", "asc");
+        $result = $this->db->get('vw_docente_lecdetail_reactivos');
+        $json = array();
+        foreach($result->result_array() as $row){
+            $json[] = array(
+                'categoria' => $row['categoria'],
+                'tipo' => $row['tipo'],
+                'id'   => $row['id'],
+            );
+        }
+        return json_encode($json);
+    }
+
     // PUBLICAR ACTIVIDAD
     function publicarActividad($data) {
         return $this->db->insert("Lectura_Actividad",$data);
@@ -100,8 +116,16 @@ class Actividad_model extends CI_Model {
     }
 
     function updateOpcMul($data,$id_op) {
+        $result = false;
         $this->db->where('idOpcionMultiple', $id_op);
-        return $this->db->update('OpcionMultiple', $data);
+        if($this->db->update('OpcionMultiple', $data)){
+            $this->db->where('idOpcionMultiple', $id_op);
+            $setId = array(
+                'idCategoria' => $data['idCategoria'],
+            );
+            $result = $this->db->update('Lectura_Actividad',$setId);
+        }
+        return $result;
     }
 
     /*===================================================================================
@@ -119,13 +143,21 @@ class Actividad_model extends CI_Model {
     }
 
     function deleteRC($id_rc) {
-        $this->db->where('idRelacionarColumnas', $id_om);
+        $this->db->where('idRelacionarColumnas', $id_rc);
         return $this->db->delete('RelacionarColumnas');
     }
 
     function updateRelCol($data,$id_rc) {
+        $result = false;
         $this->db->where('idRelacionarColumnas', $id_rc);
-        return $this->db->update('RelacionarColumnas', $data);
+        if($this->db->update('RelacionarColumnas', $data)){
+            $this->db->where('idRelacionarColumnas', $id_rc);
+            $setId = array(
+                'idCategoria' => $data['idCategoria'],
+            );
+            $result = $this->db->update('Lectura_Actividad',$setId);
+        }
+        return $result;
     }
 
     /*===================================================================================
@@ -148,8 +180,16 @@ class Actividad_model extends CI_Model {
     }
     
     function updateVerFal($data,$id_vf) {
+        $result = false;
         $this->db->where('idVerdaderoFalso', $id_vf);
-        return $this->db->update('VerdaderoFalso', $data);
+        if($this->db->update('VerdaderoFalso', $data)){
+            $this->db->where('idVerdaderoFalso', $id_vf);
+            $setId = array(
+                'idCategoria' => $data['idCategoria'],
+            );
+            $result = $this->db->update('Lectura_Actividad',$setId);
+        }
+        return $result;
     }
 
 }

@@ -6,6 +6,11 @@ class Indicadores_model extends CI_Model {
         return $this->db->insert("Categorias",$data);
     }
 
+    public function getCategories() {
+        $resultados = $this->db->get("Categorias");
+        return $resultados->result();
+    }
+
     public function getAdminCategories($idUsuario) {
         $this->db->where("idUsuario",$idUsuario);
         $resultados = $this->db->get("Categorias");

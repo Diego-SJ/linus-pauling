@@ -6,7 +6,6 @@ $(function (){
     //AJAX para eliminar una lectura 
     $(".btn-eliminar-lectura").on("click", function(){
         var id_lectura = $(this).val();
-
         $.ajax({
             url: base_url + "Web/Lecturas/viewDeleteLectura/" + id_lectura,
             type: "POST",
@@ -80,46 +79,6 @@ $(function (){
         });
     });
 
-    //AJAX para ver reactivo 
-    $(".btn-ver-reactivo").on("click", function(){
-        var id_reactivo = $(this).val();
-        $.ajax({
-            url: base_url + "Web/Actividades/getActividad/" + id_reactivo,
-            type: "POST",
-            success: function(resp){
-                $("#Visualizar .modal-body").html(resp);
-
-            }
-        });
-    });
-
-    //AJAX para eliminar un reactivo 
-    $(".btn-eliminar-reactivo").on("click", function(){
-        var id_actividad = $(this).val();
-
-        $.ajax({
-            url: base_url + "Web/Actividades/viewEliminarReactivo/" + id_actividad,
-            type: "POST",
-            success: function(resp){
-                $("#Visualizar .modal-body").html(resp);
-                //alert(resp);
-            }
-        });
-    });
-
-    //AJAX para editar un reactivo 
-    $(".btn-editar-reactivo").on("click", function(){
-        var id_actividad = $(this).val();
-
-        $.ajax({
-            url: base_url + "Web/Actividades/viewEditarReactivo/" + id_actividad,
-            type: "POST",
-            success: function(resp){
-                $("#Visualizar .modal-body").html(resp);
-            }
-        });
-    });
-
     //AJAX para eliminar un alumno 
     $(".btn-eliminar-alumno").on("click", function(){
         var id_alumno = $(this).val();
@@ -133,24 +92,5 @@ $(function (){
             }
         });
     });
-
-    document.querySelector("html").classList.add('js');
-
-    var fileInput  = document.querySelector(".input-file"),  
-        btn     = document.querySelector(".input-file-trigger"),
-        the_return = document.querySelector(".file-return");
-          
-        btn.addEventListener( "keydown", function( event ) {  
-        if ( event.keyCode == 13 || event.keyCode == 32 ) {  
-            fileInput.focus();  
-        }  
-    });
-    btn.addEventListener( "click", function( event ) {
-       fileInput.focus();
-       return false;
-    });  
-    fileInput.addEventListener( "change", function( event ) {  
-        the_return.innerHTML = this.value;  
-    }); 
 
 });

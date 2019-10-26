@@ -7,13 +7,13 @@
           <div class="form-group">
                     <h4 for="num_pag" class="col-form-label text-red"><b><i class="fa fa-cubes"></i> ELIMINAR REACTIVO</b></h4>
                 </div>
-          <form method="POST" action="<?php echo site_url('Web/Actividades/eliminarActivity');?>/<?php echo $data_actividad->id; ?>">
+          <form method="POST" action="<?php echo site_url('Web/Actividades/eliminarActivity');?>">
 
           	<input type="text" name="id_lectura_dr" value="<?php echo $data_actividad->idLectura; ?>" hidden="true">
-			<input type="text" name="id_actividad_dr" value="<?php echo $data_actividad->id; ?>" hidden="true">
-			<input type="text" name="id_om_dr" value="<?php echo $data_actividad->idOpcionMultiple; ?>" hidden="true">
-			<input type="text" name="id_rc_dr" value="<?php echo $data_actividad->idRelacionarColumnas; ?>" hidden="true">
-			<input type="text" name="id_vf_dr" value="<?php echo $data_actividad->idVerdaderoFalso; ?>" hidden="true">
+            <input type="text" name="id_actividad_dr" value="<?php echo $data_actividad->id; ?>" hidden="true">
+            <input type="text" name="id_om_dr" value="<?php echo $data_actividad->idOpcionMultiple; ?>" hidden="true">
+            <input type="text" name="id_rc_dr" value="<?php echo $data_actividad->idRelacionarColumnas; ?>" hidden="true">
+            <input type="text" name="id_vf_dr" value="<?php echo $data_actividad->idVerdaderoFalso; ?>" hidden="true">
 
                 <blockquote>
                  Se eliminará el reactivo, ¿Deseas continuar?

@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/theme/css/skins/_all-skins.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/theme/css/custom_theme.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/datatables/css/dataTable.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/morris.js/morris.css">
 </head>
 <body class="hold-transition skin-black sidebar-mini">
 
@@ -40,7 +41,6 @@
           <ul class="nav navbar-nav">
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
-
 
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="<?php echo base_url(); ?>assets/img/programador.png" class="user-image" alt="User Image">

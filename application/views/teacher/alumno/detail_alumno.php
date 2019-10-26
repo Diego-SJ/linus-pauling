@@ -183,6 +183,11 @@
                         </a>
                       </td>
                   </tr>
+                  <script>
+                      function updateUI2(id){
+                          document.getElementById(id).click();
+                      }
+                  </script>
                 <?php endforeach ?>
               <?php endif ?>
             </tbody>

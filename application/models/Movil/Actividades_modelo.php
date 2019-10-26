@@ -115,15 +115,61 @@ class Actividades_modelo extends CI_Model {
     }
 
     function saveAnswersOm($data) {
-        return $this->db->insert("Answers_om",$data);
+        $success = false;
+        if($this->db->insert("Answers_om",$data)){
+            $data2 = array(
+                'status'      => $data['status'],
+                'idAlumno'    => $data['idAlumno'],
+                'idLectura'   => $data['idLectura'],
+                'idCategoria' => $data['idCategoria'],
+            );
+            if($this->saveAnswers_Categorias($data2)){
+                $success = true;
+            }
+        }
+        return $success;
     }
 
     function saveAnswersRc($data) {
-        return $this->db->insert("Answers_rc",$data);
+        $success = 1;
+        $resp = false;
+        if($this->db->insert("Answers_rc",$data)){
+            for($i = 1; $i <= 4 ; $i++){
+                $data2 = array(
+                    'status'      => $data['status_'.$i],
+                    'idAlumno'    => $data['idAlumno'],
+                    'idLectura'   => $data['idLectura'],
+                    'idCategoria' => $data['idCategoria'],
+                );
+                $this->saveAnswers_Categorias($data2);
+                unset($data2);
+                $success++;
+            }
+            if($success > 3){
+                $resp = true;
+            }
+        }
+        return $resp;
     }
 
     function saveAnswersVf($data) {
-        return $this->db->insert("Answers_vf",$data);
+        $success = false;
+        if($this->db->insert("Answers_vf",$data)){
+            $data2 = array(
+                'status'      => $data['status'],
+                'idAlumno'    => $data['idAlumno'],
+                'idLectura'   => $data['idLectura'],
+                'idCategoria' => $data['idCategoria'],
+            );
+            if($this->saveAnswers_Categorias($data2)){
+                $success = true;
+            }
+        }
+        return $success;
+    }
+
+    function saveAnswers_Categorias($data) {
+        return $this->db->insert("Answers_Categorias",$data);
     }
 }
 

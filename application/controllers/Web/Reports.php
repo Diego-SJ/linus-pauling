@@ -13,23 +13,33 @@ class Reports extends CI_Controller {
         $this->load->view('teacher/home/template_pdf');
     }
 
-	public function pdfdetails(){
-		// if($this->uri->segment(3))
-		// {
-		// 	$customer_id = $this->uri->segment(3);
-		// 	$html_content = '<h3 align="center">Convert HTML to PDF in CodeIgniter using Dompdf</h3>';
-		// 	$html_content .= $this->htmltopdf_model->fetch_single_details($customer_id);
-		// 	$this->pdf->loadHtml($html_content);
-		// 	$this->pdf->render();
-		// 	$this->pdf->stream("".$customer_id.".pdf", array("Attachment"=>0));
-		// }
-        $idUsuario = $this->session->userdata('USER_ID');
-        $membrete = "COLEGIO LINUS PAULING PROGRESO DE OBREGON HIDALGO 2019";
-        $title = "Usuarios y contraseñas de alumnos";
-        $filename = "usersandpasswords";
-        $date = "21/09/2019";
+	public function pdfAlumnos(){
+		$membrete = strtoupper($this->input->post('alumnosTM'));	
+		$asunto = strtoupper($this->input->post('alumnosA'));
+		$filename = $this->input->post('alumnosNA');
+		$date = $this->input->post('alumnosF');
+		$orderBy = $this->input->post('alumnoFiltro');
+		$order = $this->input->post('alumnoOrder');
 
-		$html_content = $this->Reports_model->getDataToPdf($idUsuario,$membrete,$title,$date);
+        $idUsuario = $this->session->userdata('USER_ID');
+
+		$html_content = $this->Reports_model->printPDFAlumnos($idUsuario,$membrete,$asunto,$date,$orderBy,$order);
+		$this->pdf->loadHtml($html_content);
+		$this->pdf->render();
+		$this->pdf->stream("".$filename.".pdf", array("Attachment"=>0));
+	}
+
+	public function pdfLecturas(){
+		$membrete = strtoupper($this->input->post('alumnosTM'));	
+		$asunto = strtoupper($this->input->post('alumnosA'));
+		$filename = $this->input->post('alumnosNA');
+		$date = $this->input->post('alumnosF');
+		$orderBy = $this->input->post('alumnoFiltro');
+		$order = $this->input->post('alumnoOrder');
+
+        $idUsuario = $this->session->userdata('USER_ID');
+
+		$html_content = $this->Reports_model->printPDFAlumnos($idUsuario,$membrete,$asunto,$date,$orderBy,$order);
 		$this->pdf->loadHtml($html_content);
 		$this->pdf->render();
 		$this->pdf->stream("".$filename.".pdf", array("Attachment"=>0));

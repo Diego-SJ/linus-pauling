@@ -117,6 +117,7 @@
                     <?php echo ($index.") ".$reactivo->pregunta); ?>
                     <!-- identificador -->
                     <?php echo "<input class='question_hide' value='".$reactivo->idVerdaderoFalso."' name='idrvf".$index."' hidden='hidden'>"; ?>
+                    <?php echo "<input class='question_hide' value='".$reactivo->idCategoria."' name='idcat".$index."' hidden='hidden'>"; ?>
                   </h4>
                   <!-- respuestas -->
                     <?php echo "<input type='text' value='".$reactivo->resp_correcta."' name='status_".$index."' class='question_hide' hidden='hidden'>"; ?>

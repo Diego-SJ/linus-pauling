@@ -6,6 +6,7 @@ class Alumno extends CI_Controller {
     public function __construct(){
         parent:: __construct();
         $this->load->model("Web/Alumno_model");
+        $this->load->model("Web/admin/Indicadores_model");
         if($this->session->userdata('USER_ID') == '' || $this->session->userdata('USER_TYPE') != '2') {  
             redirect(base_url().'Welcome');  
         } 
@@ -134,5 +135,49 @@ class Alumno extends CI_Controller {
         } else {
             redirect(base_url()."Web/Alumno");
         }
+    }
+
+    public function getDataChart1(){
+        $idAlumno = $this->input->post("idAlumno");
+        $idLectura = $this->input->post("idLectura");
+
+        $categorias = $this->Indicadores_model->getCategories();
+        $correctas  = $this->Alumno_model->getCorrectsChart1($idAlumno,$idLectura);
+        $incorrectas = $this->Alumno_model->getIncorrectsChart1($idAlumno,$idLectura);
+
+        $json = array();
+        $num_ac = 0;
+        $num_inc = 0;
+        foreach($categorias as $row){
+
+            foreach($correctas as $row2){
+                if($row->nombre == $row2->nombre){
+                    $num_ac = $row2->correctas;
+                } 
+            }
+
+            foreach($incorrectas as $row3){
+                if($row->nombre == $row3->nombre){
+                    $num_inc = $row3->incorrectas;
+                } 
+            }
+            
+            $data = array(
+                'idCategoria' => $row->idCategoria,
+                'categoria' => $row->nombre,
+                'correctas' => $num_ac,
+                'incorrectas' => $num_inc,
+                'percent'  => ($num_ac == 0 && $num_inc == 0)?0:round((100/($num_ac+$num_inc))*$num_ac),
+            );
+            
+            $json[] = $data;
+
+            unset($data);
+            $num_inc = 0;
+            $num_ac = 0;
+            $percent = 0;
+        }
+
+        echo json_encode($json);
     }
 }
