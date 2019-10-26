@@ -1,6 +1,4 @@
 $(function () {
-    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' });
-    $('[data-mask]').inputmask();
 
     $('#aNombre').on('click', function(){
       if($(this).prop('checked')){
