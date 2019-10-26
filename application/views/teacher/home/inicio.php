@@ -87,9 +87,13 @@
                 <span class="badge bg-azul"><b><i class="fa fa-cog txt-15"></i></b></span>
                 <i class="fa fa-users"></i> PDF alumnos
               </a>
-              <a class="btn btn-app">
+              <a type="button" class="btn btn-app" data-toggle="modal" data-target="#customPDFLecturas">
               <span class="badge bg-azul"><b><i class="fa fa-cog txt-15"></i></b></span>
                 <i class="fa fa-book"></i> PDF lecturas
+              </a>
+              <a type="button" class="btn btn-app" data-toggle="modal" data-target="#customPDFAlumno">
+              <span class="badge bg-azul"><b><i class="fa fa-cog txt-15"></i></b></span>
+                <i class="fa fa-user"></i> PDF alumno
               </a>
             </div>
           </div>
@@ -245,7 +249,7 @@
 
 <div class="modal fade" id="customPDFAlumnos" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <form id="pdfAlumnoForm" method="post" action="<?php echo base_url().'Web/Reports/pdfAlumnos' ?>">
+    <form id="pdfAlumnosForm" method="post" action="<?php echo base_url().'Web/Reports/pdfAlumnos' ?>">
       <div class="modal-content">
         <div class="modal-body">
           <table class="table">
@@ -258,25 +262,25 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         Titulo membrete
-                        <input id="alumnosTM" name="alumnosTM" type="text" class="form-control">
+                        <input id="alumnosTM" name="alumnosTM" type="text" class="form-control" required>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         Asunto
-                        <input id="alumnosA" name="alumnosA" type="text" class="form-control">
+                        <input id="alumnosA" name="alumnosA" type="text" class="form-control" required>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         Fecha
-                        <input id="alumnosF" name="alumnosF" type="date" class="form-control">
+                        <input id="alumnosF" name="alumnosF" type="date" class="form-control" required>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         Nombre del pdf
-                        <input id="alumnosNA" name="alumnosNA" type="text" class="form-control">
+                        <input id="alumnosNA" name="alumnosNA" type="text" class="form-control" required>
                       </div>
                     </div>
                   </div>
@@ -368,6 +372,276 @@
                     </div>
                     <div class="col-md-6 col-xs-6">
                       <select id="alumnoOrder" name="alumnoOrder" class="form-control">
+                        <option value="asc">ascendente</option>
+                        <option value="desc">descendente</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary"><i class="fa fa-print text-white"></i> Imprimir</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal fade" id="customPDFLecturas" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <form id="pdfLecturasForm" method="post" action="<?php echo base_url().'Web/Reports/pdfLecturas' ?>">
+      <div class="modal-content">
+        <div class="modal-body">
+          <table class="table">
+            <tbody class="text-center">
+              <h4>Generar PDF</h4>
+              <tr>
+                <td>
+                  <div class="row">
+                    <h4>Encabezado:</h4>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        Titulo membrete
+                        <input id="lecturasTM" name="lecturasTM" type="text" class="form-control" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        Asunto
+                        <input id="lecturasA" name="lecturasA" type="text" class="form-control" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        Fecha
+                        <input id="lecturasF" name="lecturasF" type="date" class="form-control" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        Nombre del pdf
+                        <input id="lecturasNA" name="lecturasNA" type="text" class="form-control" required>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              
+              <tr>
+                <td>
+                  <div class="row">
+                    <h4>Selecciona los datos que deseas imprimir</h4>
+                    <div class="col-md-4 col-sm-6 col-xs-6">
+                      <label class="badge bg-gray btn btn-block mt-1 label-check">
+                        <input id="lTtitulo" name="lTtitulo" type="checkbox"> Título
+                      </label>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-6">
+                      <label class="badge bg-gray btn btn-block mt-1 label-check">
+                        <input id="lAutor" name="lAutor" type="checkbox"> Autor
+                      </label>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-6">
+                      <label class="badge bg-gray btn btn-block mt-1 label-check">
+                        <input id="lDescripcion" name="lDescripcion" type="checkbox"> Descripción
+                      </label>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-6">
+                      <label class="badge bg-gray btn btn-block mt-1 label-check">
+                        <input id="lFecha" name="lFecha" type="checkbox"> Fecha creación
+                      </label>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-6">
+                      <label class="badge bg-gray btn btn-block mt-1 label-check">
+                        <input id="lTipo" name="lTipo" type="checkbox"> Tipo lectura
+                      </label>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-6">
+                      <label class="badge bg-gray btn btn-block mt-1 label-check">
+                        <input id="lReactivos" name="lReactivos" type="checkbox"> Reactivos
+                      </label>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              
+              <tr>
+                <td>
+                  <div class="row">
+                    <h4>Ordenar por:</h4>
+                    <div class="col-md-6 col-xs-6">
+                      <select id="lecturasFiltro" name="lecturasFiltro" class="form-control">
+                        <option value="0">- elije un filtro -</option>
+                        <option id="opt1l" hidden="hidden" value="titulo">Título</option>
+                        <option id="opt2l" hidden="hidden" value="autor">Autor</option>
+                        <option id="opt3l" hidden="hidden" value="desc_corta">Descripción</option>
+                        <option id="opt4l" hidden="hidden" value="fecha_creacion">Fecha creación</option>
+                        <option id="opt5l" hidden="hidden" value="tipo_lectura">Tipo lectura</option>
+                        <!-- <option id="opt6l" hidden="hidden" value="attemps">Reactivos</option> -->
+                      </select>
+                    </div>
+                    <div class="col-md-6 col-xs-6">
+                      <select id="lecturasOrder" name="lecturasOrder" class="form-control">
+                        <option value="asc">ascendente</option>
+                        <option value="desc">descendente</option>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary"><i class="fa fa-print text-white"></i> Imprimir</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal fade" id="customPDFAlumno" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <form id="pdfAlumnoForm" method="post" action="<?php echo base_url().'Web/Reports/pdfAlumno' ?>">
+      <div class="modal-content">
+        <div class="modal-body">
+          <table class="table">
+            <tbody class="text-center">
+              <h4>Generar PDF</h4>
+              <tr>
+                <td>
+                  <div class="row">
+                    <h4>Encabezado:</h4>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        Titulo membrete
+                        <input id="alumnoTM" name="alumnoTM" type="text" class="form-control" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        Asunto
+                        <input id="alumnoA" name="alumnoA" type="text" class="form-control" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        Fecha
+                        <input id="alumnoF" name="alumnoF" type="date" class="form-control" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        Nombre del pdf
+                        <input id="alumnoNA" name="alumnoNA" type="text" class="form-control" required>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="row">
+                    <h4>Selecciona un alumno</h4>
+                    <div class="col-sm-12">
+                      <select id="lecturasFiltro" name="lecturasFiltro" class="form-control">
+                        <option value="0">- elije un alumno -</option>
+                        
+                      </select>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              
+              <tr>
+                <td>
+                  <div class="row">
+                    <h4>Selecciona los datos que deseas imprimir</h4>
+                    <div class="col-md-4 col-sm-6 col-xs-6">
+                      <label class="badge bg-gray btn btn-block mt-1 label-check">
+                        <input id="aGrado" name="aGrado" type="checkbox"> Detalle lecturas completadas
+                      </label>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-6">
+                      <label class="badge bg-gray btn btn-block mt-1 label-check">
+                        <input id="aNombre" name="aNombre" type="checkbox"> Nombre
+                      </label>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-6">
+                      <label class="badge bg-gray btn btn-block mt-1 label-check">
+                        <input id="aApellP" name="aApellP" type="checkbox"> Apellido paterno
+                      </label>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-6">
+                      <label class="badge bg-gray btn btn-block mt-1 label-check">
+                        <input id="aApellM" name="aApellM" type="checkbox"> Apellido materno
+                      </label>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-6">
+                      <label class="badge bg-gray btn btn-block mt-1 label-check">
+                        <input id="aUsuario" name="aUsuario" type="checkbox"> Usuario
+                      </label>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-6">
+                      <label class="badge bg-gray btn btn-block mt-1 label-check">
+                        <input id="aPassword" name="aPassword" type="checkbox"> Contraseña
+                      </label>
+                    </div>
+                    
+                    <div class="col-md-4 col-sm-6 col-xs-6">
+                      <label class="badge bg-gray btn btn-block mt-1 label-check">
+                        <input id="aGrupo" name="aGrupo" type="checkbox"> Grupo
+                      </label>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-6">
+                      <label class="badge bg-gray btn btn-block mt-1 label-check">
+                        <input id="aLecturas" name="aLecturas" type="checkbox"> Lecturas completadas
+                      </label>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-6">
+                      <label class="badge bg-gray btn btn-block mt-1 label-check">
+                        <input id="aAciertos" name="aAciertos" type="checkbox"> Aciertos totales
+                      </label>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-6">
+                      <label class="badge bg-gray btn btn-block mt-1 label-check">
+                        <input id="aIncorrectos" name="aIncorrectos" type="checkbox"> Incorrectos totales
+                      </label>
+                    </div>
+                    <div class="col-md-4 col-sm-6 col-xs-6">
+                      <label class="badge bg-gray btn btn-block mt-1 label-check">
+                        <input id="aPromedio" name="aPromedio" type="checkbox"> Promedio general
+                      </label>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              
+              <tr>
+                <td>
+                  <div class="row">
+                    <h4>Ordenar por:</h4>
+                    <div class="col-md-6 col-xs-6">
+                      <select id="lecturasFiltro" name="lecturasFiltro" class="form-control">
+                        <option value="0">- elije un filtro -</option>
+                        <option id="opt1l" hidden="hidden" value="titulo">Título</option>
+                        <option id="opt2l" hidden="hidden" value="autor">Autor</option>
+                        <option id="opt3l" hidden="hidden" value="desc_corta">Descripción</option>
+                        <option id="opt4l" hidden="hidden" value="fecha_creacion">Fecha creación</option>
+                        <option id="opt5l" hidden="hidden" value="tipo_lectura">Tipo lectura</option>
+                        <!-- <option id="opt6l" hidden="hidden" value="attemps">Reactivos</option> -->
+                      </select>
+                    </div>
+                    <div class="col-md-6 col-xs-6">
+                      <select id="lecturasOrder" name="lecturasOrder" class="form-control">
                         <option value="asc">ascendente</option>
                         <option value="desc">descendente</option>
                       </select>

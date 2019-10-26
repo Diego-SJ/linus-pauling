@@ -30,16 +30,16 @@ class Reports extends CI_Controller {
 	}
 
 	public function pdfLecturas(){
-		$membrete = strtoupper($this->input->post('alumnosTM'));	
-		$asunto = strtoupper($this->input->post('alumnosA'));
-		$filename = $this->input->post('alumnosNA');
-		$date = $this->input->post('alumnosF');
-		$orderBy = $this->input->post('alumnoFiltro');
-		$order = $this->input->post('alumnoOrder');
+		$membrete = strtoupper($this->input->post('lecturasTM'));	
+		$asunto = strtoupper($this->input->post('lecturasA'));
+		$filename = $this->input->post('lecturasNA');
+		$date = $this->input->post('lecturasF');
+		$orderBy = $this->input->post('lecturasFiltro');
+		$order = $this->input->post('lecturasOrder');
 
         $idUsuario = $this->session->userdata('USER_ID');
 
-		$html_content = $this->Reports_model->printPDFAlumnos($idUsuario,$membrete,$asunto,$date,$orderBy,$order);
+		$html_content = $this->Reports_model->printPDFLecturas($idUsuario,$membrete,$asunto,$date,$orderBy,$order);
 		$this->pdf->loadHtml($html_content);
 		$this->pdf->render();
 		$this->pdf->stream("".$filename.".pdf", array("Attachment"=>0));

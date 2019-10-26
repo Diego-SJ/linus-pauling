@@ -1,74 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Reports_model extends CI_Model {
-	
-	function getDataToPdf($idUsuario,$membrete,$title,$date) {
-        $this->db->where("idUsuario",$idUsuario);
-		$resultados = $this->db->get("Alumno");
-		
-		$output = '
-		<!DOCTYPE html>
-		<html lang="en">
-		<head>
-			<meta charset="UTF-8">
-			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<meta http-equiv="X-UA-Compatible" content="ie=edge">
-			<title>Document</title>
-			<link rel="stylesheet" href="'.base_url().'assets/font-awesome/css/font-awesome.min.css">
-			<link rel="stylesheet" href="'.base_url().'assets/theme/css/AdminLTE.min.css">
-			<link rel="stylesheet" href="'.base_url().'assets/theme/css/custom_theme.css">
-		</head>
-		<body>
-		<hr class="hr-table text-center">
-			<section class="invoice membrete" style="border: 0px !important;">
-				<div class="row">
-					<div class="col-xs-12">
-						<h2 class="page-header text-center text-navy" style="margin: 5px 0px 5px 0px !important; padding: 0px !important;">
-						<i class="fa fa-globe"></i> '.$membrete.'
-						</h2>
-					</div>
-				</div>
-				<hr class="hr-membrete">
-				<div class="row invoice-info">
-					<div class="col-sm-4 invoice-col text-navy">
-						<b>Asunto:</b> '.$title.'<br>
-						<b>Docente:</b> '.(ucwords($this->session->userdata('USER_NAME'))).'<br>
-						<b>Fecha:</b> <span class="text-navy-active">'.$date.'</span>
-					</div>
-				</div>
-			</section>
-			<hr class="hr-table text-center">
-			<table id="tablePDF" class="table table-striped table-bordered" style="width:100%;">
-				<tbody>
-					<tr>
-						<th style="width: 10px">#</th>
-						<th>Nombre</th>
-						<th>A. Paterno</th>
-						<th>A. Materno</th>
-						<th>usuario</th>
-						<th>Contraseña</th>
-					</tr>';
-				foreach($resultados->result() as $row)
-				{
-					$output .= '
-					<tr>
-						<td>1.</td>
-						<td>'.$row->nombre.'</td>
-						<td>'.$row->a_paterno.'</td>
-						<td>'.$row->a_materno.'</td>
-						<td>'.$row->usuario.'</td>
-						<td>'.$row->password.'</td>
-					</tr>
-					';
-				}
-		$output .='
-				</tbody>
-			</table>
-		</body>
-		</html>';
-		return $output;
-	}
-	
+
 	function printPDFAlumnos($idUsuario,$membrete,$asunto,$fecha,$by,$order) {
 
 		$select = array();
@@ -131,6 +64,89 @@ class Reports_model extends CI_Model {
 						$output .="<td>".$row->incorrectos."</td>";}
 					if($this->input->post('aPromedio') == true){
 						$output .="<td>".$row->promedio."</td>";} 
+					$output .= '
+					</tr>
+					';
+				}
+		$output .='
+				</tbody>
+			</table>
+		</body>
+		</html>';
+		return $output;
+	}
+
+	function printPDFLecturas($idUsuario,$membrete,$asunto,$fecha,$by,$order) {
+
+		$select    = array();
+		array_push($select, "idLectura");
+		$thead     = "";
+		$tsizeText = "";
+		$num_columns = 0;
+
+		if($this->input->post('lTtitulo') == true){array_push($select, "titulo");$num_columns++;$thead .="<th>Título</th>";} 
+		if($this->input->post('lAutor') == true){array_push($select, "autor");$num_columns++; $thead .="<th>Autor</th>";}
+		if($this->input->post('lDescripcion') == true){array_push($select, "desc_corta");$num_columns++; $thead .="<th>Descripción</th>";} 
+		if($this->input->post('lFecha') == true){array_push($select, "fecha_creacion");$num_columns++; $thead .="<th>Fecha creación</th>";} 
+		if($this->input->post('lTipo') == true){array_push($select, "tipo_lectura");$num_columns++; $thead .="<th>Tipo lectura</th>";} 
+		if($this->input->post('lReactivos') == true){$num_columns++; $thead .="<th>Reactivos</th>";}
+
+		$tsizeText = $this->countColumns($num_columns); 
+
+		$this->db->order_by($by, $order);
+		$this->db->where("idUsuario",$idUsuario);
+		$this->db->select($select);
+		$resultados = $this->db->get("Lectura");
+		
+		$header = $this->headerPDF($membrete,$asunto,$fecha);
+		$output = $header.'
+			<table id="tablePDF" class="table table-striped table-bordered text-center" style="width:100%;">
+				<thead>
+					<tr>
+						<th>#</th>
+						'.$thead.'
+					</tr>
+				</thead>
+				<tbody style="font-size: 12px">';
+				$index = 1;
+				foreach($resultados->result() as $row){
+					$output .= '
+					<tr>
+						<td>'.$index++.'</td>';
+					if($this->input->post('lTtitulo') == true){
+						$output .="<td>".$row->titulo."</td>";} 
+					if($this->input->post('lAutor') == true){
+						$output .="<td>".$row->autor."</td>";}
+					if($this->input->post('lDescripcion') == true){
+						$output .="<td>".$row->desc_corta."</td>";} 
+					if($this->input->post('lFecha') == true){
+						$output .="<td>".$row->fecha_creacion."</td>";} 
+					if($this->input->post('lTipo') == true){
+						$output .=($row->tipo_lectura == 1)?"<td>Personalizado</td>":"<td>PDF</td>";} 
+					if($this->input->post('lReactivos') == true){
+						$consult = '
+						SELECT COUNT(idCategoria) as num_by_cat, nombre, SUM(idOpcionMultiple) as check_om,
+						SUM(idRelacionarColumnas) as check_rc, SUM(idVerdaderoFalso) as check_vf FROM vw_reports_lecturas
+						where idLectura = '.$row->idLectura.' and idUsuario = '.$idUsuario.'
+						group by nombre';
+						$sub_row = $this->db->query($consult);
+						$om = 0; $rc =0; $vf=0;
+						$list_reactives = "<ul style=\"font-size:10px; list-style:none; padding: 5px !important;\">";
+						$list_reactives .= "<li><b>Categorias:</b></li>";
+						foreach($sub_row->result() as $content){
+							($content->check_om > 0)?$om++:0;
+							($content->check_rc > 0)?$rc++:0;
+							($content->check_vf > 0)?$vf++:0;
+							$list_reactives .= "<li>$content->nombre: <b>$content->num_by_cat</b></li>";
+						}
+						$list_reactives .= "</ul><ul style=\"font-size:10px; list-style:none; padding: 5px !important;\">";
+						$list_reactives .= "<li><b>Tipos:</b></li>";
+						$list_reactives .= ($om > 0)?"<li>Opción multiple</li>":"";
+						$list_reactives .= ($rc > 0)?"<li>Relacionar columnas</li>":"";
+						$list_reactives .= ($vf > 0)?"<li>Verdadero falso</li>":"";
+						$list_reactives .= "</ul>";
+						$output .="<td style=\"text-align:left !important;\"> $list_reactives </td>";
+					}
 					$output .= '
 					</tr>
 					';

@@ -100,7 +100,7 @@ $(function () {
       }
     });
 
-    $('#pdfAlumnoForm').submit(function(e) {
+    $('#pdfAlumnosForm').submit(function(e) {
         if($('#alumnoFiltro option:selected').val() == 0){
           alert("Selecciona un filtro.");
           e.preventDefault();
@@ -159,11 +159,18 @@ $(function () {
     
     $('#lReactivos').on('click', function(){
         if($(this).prop('checked')){
-            $('#opt6l').removeAttr('hidden');
+            // $('#opt6l').removeAttr('hidden');
             $(this).attr('value','true'); 
         } else {
-            $('#opt6l').attr('hidden','hidden');
+            // $('#opt6l').attr('hidden','hidden');
             $(this).removeAttr('value'); 
         }
     });
+
+    $('#pdfLecturasForm').submit(function(e) {
+      if($('#lecturasFiltro option:selected').val() == 0){
+        alert("Selecciona un filtro.");
+        e.preventDefault();
+      }
+  });
   })
