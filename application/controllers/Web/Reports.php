@@ -45,4 +45,35 @@ class Reports extends CI_Controller {
 		$this->pdf->stream("".$filename.".pdf", array("Attachment"=>0));
 	}
 
+	public function pdfAlumno(){
+		$membrete = strtoupper($this->input->post('alumnoTM'));	
+		$asunto = strtoupper($this->input->post('alumnoA'));
+		$filename = $this->input->post('alumnoNA');
+		$date = $this->input->post('alumnoF');
+		$idAlumno = $this->input->post('adidAlumno');
+
+        $idUsuario = $this->session->userdata('USER_ID');
+
+		$html_content = $this->Reports_model->printPDFAlumno($idUsuario,$membrete,$asunto,$date,$idAlumno);
+		$this->pdf->loadHtml($html_content);
+		$this->pdf->render();
+		$this->pdf->stream("".$filename.".pdf", array("Attachment"=>0));
+	}
+
+	public function pdfLectura(){
+		$membrete = strtoupper($this->input->post('lecturaTM'));	
+		$asunto = strtoupper($this->input->post('lecturaA'));
+		$filename = $this->input->post('lecturaNA');
+		$date = $this->input->post('lecturaF');
+		$idLectura = $this->input->post('ldidLectura');
+
+        $idUsuario = $this->session->userdata('USER_ID');
+
+		$html_content = $this->Reports_model->printPDFLectura($idUsuario,$membrete,$asunto,$date,$idLectura);
+		$this->pdf->loadHtml($html_content);
+		$this->pdf->render();
+		$this->pdf->stream("".$filename.".pdf", array("Attachment"=>0));
+		// echo $html_content;
+	}
+
 }

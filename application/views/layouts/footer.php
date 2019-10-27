@@ -134,7 +134,6 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <h6 id="desc_na">Completa los campos, posteriormente da <label id="rna_clickhere" class="text-blue">click aquí</label> para generar el usuario y la contraseña del alumno.</h6>
-
                         </div>
                     </div>
 
@@ -194,10 +193,6 @@
     <!-- Morris -->
     <script src="<?php echo base_url() ?>assets/raphael/raphael.min.js"></script>
     <script src="<?php echo base_url() ?>assets/morris.js/morris.min.js"></script>
-    <!-- FLOT CHARTS -->
-    <script src="<?php echo base_url() ?>assets/Flot/jquery.flot.js"></script>
-    <script src="<?php echo base_url() ?>assets/Flot/jquery.flot.resize.js"></script>
-    <script src="<?php echo base_url() ?>assets/Flot/jquery.flot.pie.js"></script>
     <script> CKEDITOR.replace( 'editor1' ); </script>
     </body>
 

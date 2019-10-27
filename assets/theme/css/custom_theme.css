@@ -641,27 +641,12 @@
 }
 
 /* table pdf */
-#tablePDF {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  font-size: 15px;
-  border-collapse: collapse;
-  width: 100%;
+.tva{
+  vertical-align:middle !important;
 }
 
-#tablePDF td, #tablePDF th {
-  border: 1px solid rgb(245, 245, 245);
-  padding: 2px;
-}
-
-#tablePDF tr:nth-child(even){background-color: rgb(255, 255, 255);}
-
-#tablePDF th {
-  margin-top: 30px !important;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  text-align: left;
-  background-color: rgb(241, 241, 241);
-  color: rgb(27, 25, 44);
+.header-text{
+  font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .membrete {

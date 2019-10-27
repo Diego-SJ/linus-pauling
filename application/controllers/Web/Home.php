@@ -7,6 +7,8 @@ class Home extends CI_Controller {
         parent:: __construct();
         $this->load->model("Web/Home_model");
         $this->load->model("Web/Usuario_model");
+        $this->load->model("Web/Alumno_model");
+        $this->load->model("Web/Lectura_model");
         if($this->session->userdata('USER_ID') == '' || $this->session->userdata('USER_TYPE') != '2') {  
             redirect(base_url().'Welcome');  
         } 
@@ -18,7 +20,9 @@ class Home extends CI_Controller {
       $data = array(
         'teacher_alumnos'  => $this->Home_model->getAlumosDashboard($id_usuario), 
         'teacher_lecturas' => $this->Home_model->getLecturasDashboard($id_usuario),
-        'teacher_info'     => $this->Home_model->getDocente($id_usuario)
+        'teacher_info'     => $this->Home_model->getDocente($id_usuario),
+        'alumnos'          => $this->Alumno_model->getAlumnosByTeacher($id_usuario),
+        'lecturas'         => $this->Lectura_model->getAllLecturas($id_usuario)
       );
 
       $this->load->view('layouts/header');

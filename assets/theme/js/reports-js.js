@@ -104,6 +104,10 @@ $(function () {
         if($('#alumnoFiltro option:selected').val() == 0){
           alert("Selecciona un filtro.");
           e.preventDefault();
+        } else {
+          $('.create-pdf').attr('disabled','true');
+          $('.create-pdf').text('Creando PDF...');
+          $('.cancel-pdf').attr('disabled','true');
         }
     });
 
@@ -168,9 +172,107 @@ $(function () {
     });
 
     $('#pdfLecturasForm').submit(function(e) {
-      if($('#lecturasFiltro option:selected').val() == 0){
-        alert("Selecciona un filtro.");
-        e.preventDefault();
-      }
-  });
+        if($('#lecturasFiltro option:selected').val() == 0){
+          alert("Selecciona un filtro.");
+          e.preventDefault();
+        } else {
+          $('.create-pdf').attr('disabled','true');
+          $('.create-pdf').text('Creando PDF...');
+          $('.cancel-pdf').attr('disabled','true');
+        }
+    });
+
+    //PDF ALUMNO DETAIL
+
+    $('#adLogros').on('click', function(){
+        if($(this).prop('checked')){
+            $(this).attr('value','true'); 
+        } else {
+            $(this).removeAttr('value'); 
+        }
+    });
+    $('#adDetalles').on('click', function(){
+        if($(this).prop('checked')){
+            $(this).attr('value','true'); 
+            // $('.more_detail').removeAttr('hidden');
+        } else {
+            $(this).removeAttr('value'); 
+            // $('.more_detail').attr('hidden','hidden');
+            // $('#adResultados').removeAttr('value'); 
+            // $('#adAprovechamiento').removeAttr('value'); 
+            // $('#adResultados').prop('checked',false); 
+            // $('#adAprovechamiento').prop('checked',false); 
+        }
+    });
+    // $('#adResultados').on('click', function(){
+    //     if($(this).prop('checked')){
+    //         $(this).attr('value','true'); 
+    //     } else {
+    //         $(this).removeAttr('value'); 
+    //     }
+    // });
+    // $('#adAprovechamiento').on('click', function(){
+    //     if($(this).prop('checked')){
+    //         $(this).attr('value','true'); 
+    //     } else {
+    //         $(this).removeAttr('value'); 
+    //     }
+    // });
+
+    $('#pdfAlumnoForm').submit(function(e) {
+        if($('#adidAlumno option:selected').val() == 0){
+          alert("Selecciona un alumno.");
+          e.preventDefault();
+        } else {
+          $('.create-pdf').attr('disabled','true');
+          $('.create-pdf').text('Creando PDF...');
+          $('.cancel-pdf').attr('disabled','true');
+        }
+    });
+
+    // PDF LECTURA DETAIL
+
+    $('#ldAlumnos').on('click', function(){
+        if($(this).prop('checked')){
+            $(this).attr('value','true'); 
+        } else {
+            $(this).removeAttr('value'); 
+        }
+    });
+
+    $('#ldInforeact').on('click', function(){
+        if($(this).prop('checked')){
+            $(this).attr('value','true'); 
+        } else {
+            $(this).removeAttr('value'); 
+        }
+    });
+
+    $('#ldCuestionario').on('click', function(){
+        if($(this).prop('checked')){
+            $(this).attr('value','true'); 
+        } else {
+            $(this).removeAttr('value'); 
+        }
+    });
+
+    $('#ldCuestionarioResuelto').on('click', function(){
+        if($(this).prop('checked')){
+            $(this).attr('value','true'); 
+        } else {
+            $(this).removeAttr('value'); 
+        }
+    });
+
+    $('#pdfLecturaForm').submit(function(e) {
+        if($('#ldidLectura option:selected').val() == 0){
+          alert("Selecciona una lectura.");
+          e.preventDefault();
+        } else {
+          $('.create-pdf').attr('disabled','true');
+          $('.create-pdf').text('Creando PDF...');
+          $('.cancel-pdf').attr('disabled','true');
+        }
+    });
+
   })

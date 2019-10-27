@@ -95,6 +95,10 @@
               <span class="badge bg-azul"><b><i class="fa fa-cog txt-15"></i></b></span>
                 <i class="fa fa-user"></i> PDF alumno
               </a>
+              <a type="button" class="btn btn-app" data-toggle="modal" data-target="#customPDFLectura">
+              <span class="badge bg-azul"><b><i class="fa fa-cog txt-15"></i></b></span>
+                <i class="fa fa-bookmark"></i> PDF lectura
+              </a>
             </div>
           </div>
 
@@ -247,7 +251,7 @@
 
 <!-- FIN CONTENIDO  -->
 
-<div class="modal fade" id="customPDFAlumnos" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="customPDFAlumnos" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <form id="pdfAlumnosForm" method="post" action="<?php echo base_url().'Web/Reports/pdfAlumnos' ?>">
       <div class="modal-content">
@@ -384,15 +388,15 @@
           </table>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-primary"><i class="fa fa-print text-white"></i> Imprimir</button>
+          <button type="button" class="btn btn-secondary cancel-pdf" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary create-pdf"><i class="fa fa-print text-white"></i> Crear PDF</button>
         </div>
       </div>
     </form>
   </div>
 </div>
 
-<div class="modal fade" id="customPDFLecturas" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="customPDFLecturas" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <form id="pdfLecturasForm" method="post" action="<?php echo base_url().'Web/Reports/pdfLecturas' ?>">
       <div class="modal-content">
@@ -499,15 +503,15 @@
           </table>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-primary"><i class="fa fa-print text-white"></i> Imprimir</button>
+          <button type="button" class="btn btn-secondary cancel-pdf" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary create-pdf"><i class="fa fa-print text-white"></i> Crear PDF</button>
         </div>
       </div>
     </form>
   </div>
 </div>
 
-<div class="modal fade" id="customPDFAlumno" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="customPDFAlumno" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <form id="pdfAlumnoForm" method="post" action="<?php echo base_url().'Web/Reports/pdfAlumno' ?>">
       <div class="modal-content">
@@ -552,9 +556,17 @@
                   <div class="row">
                     <h4>Selecciona un alumno</h4>
                     <div class="col-sm-12">
-                      <select id="lecturasFiltro" name="lecturasFiltro" class="form-control">
+                      <select id="adidAlumno" name="adidAlumno" class="form-control">
                         <option value="0">- elije un alumno -</option>
-                        
+                        <?php 
+                        if(!empty($alumnos)){
+                          $options = "";
+                          foreach($alumnos as $alumno){
+                            $options .= "<option value=\"".$alumno->idAlumno."\">".$alumno->nombre." ".$alumno->a_paterno." ".$alumno->a_materno."</option>";
+                          }
+                          echo $options;
+                        }
+                        ?>
                       </select>
                     </div>
                   </div>
@@ -565,24 +577,125 @@
                 <td>
                   <div class="row">
                     <h4>Selecciona los datos que deseas imprimir</h4>
-                    <div class="col-md-4 col-sm-6 col-xs-6">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
                       <label class="badge bg-gray btn btn-block mt-1 label-check">
                         <input id="adLogros" name="adLogros" type="checkbox"> Logros
                       </label>
                     </div>
-                    <div class="col-md-4 col-sm-6 col-xs-6">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
                       <label class="badge bg-gray btn btn-block mt-1 label-check">
                         <input id="adDetalles" name="adDetalles" type="checkbox"> Lecturas completadas
                       </label>
                     </div>
-                    <div class="col-md-4 col-sm-6 col-xs-6">
+                    <!-- <div class="col-md-4 col-sm-6 col-xs-6 more_detail" hidden="hidden">
                       <label class="badge bg-gray btn btn-block mt-1 label-check">
-                        <input id="adResultados" name="adResultados" type="checkbox"> Resultados
+                        <input id="adResultados" name="adResultados" type="checkbox" alt="Resultados de la lectura como aciertos, incorrectas, etc."> Resultados
                       </label>
                     </div>
-                    <div class="col-md-4 col-sm-6 col-xs-6">
+                    <div class="col-md-4 col-sm-6 col-xs-6 more_detail" hidden="hidden">
                       <label class="badge bg-gray btn btn-block mt-1 label-check">
-                        <input id="adAprovechamiento" name="adAprovechamiento" type="checkbox"> Aprovechamiento
+                        <input id="adAprovechamiento" name="adAprovechamiento" type="checkbox" alt="Aprovechamiento obtenido por categorías."> Aprovechamiento
+                      </label>
+                    </div> -->
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary cancel-pdf" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary create-pdf"><i class="fa fa-print text-white"></i> Crear PDF</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal fade" id="customPDFLectura" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <form id="pdfLecturaForm" method="post" action="<?php echo base_url().'Web/Reports/pdfLectura' ?>">
+      <div class="modal-content">
+        <div class="modal-body">
+          <table class="table">
+            <tbody class="text-center">
+              <h4>Generar PDF</h4>
+              <tr>
+                <td>
+                  <div class="row">
+                    <h4>Encabezado:</h4>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        Titulo membrete
+                        <input id="lecturaTM" name="lecturaTM" type="text" class="form-control" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        Asunto
+                        <input id="lecturaA" name="lecturaA" type="text" class="form-control" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        Fecha
+                        <input id="lecturaF" name="lecturaF" type="date" class="form-control" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        Nombre del pdf
+                        <input id="lecturaNA" name="lecturaNA" type="text" class="form-control" required>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <div class="row">
+                    <h4>Selecciona una lectura</h4>
+                    <div class="col-sm-12">
+                      <select id="ldidLectura" name="ldidLectura" class="form-control">
+                        <option value="0">- elije una lectura -</option>
+                        <?php 
+                        if(!empty($lecturas)){
+                          $options = "";
+                          foreach($lecturas as $lectura){
+                            $options .= "<option value=\"".$lectura->idLectura."\">".$lectura->titulo."</option>";
+                          }
+                          echo $options;
+                        }
+                        ?>
+                      </select>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              
+              <tr>
+                <td>
+                  <div class="row">
+                    <h4>Selecciona los datos que deseas imprimir</h4>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                      <label class="badge bg-gray btn btn-block mt-1 label-check">
+                        <input id="ldInforeact" name="ldInforeact" type="checkbox"> Información reactivos 
+                      </label>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                      <label class="badge bg-gray btn btn-block mt-1 label-check">
+                        <input id="ldAlumnos" name="ldAlumnos" type="checkbox"> Alumnos que completarón esta lectura
+                      </label>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6 more_detail">
+                      <label class="badge bg-gray btn btn-block mt-1 label-check">
+                        <input id="ldCuestionario" name="ldCuestionario" type="checkbox"> Reactivos tipo cuestionario
+                      </label>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6 more_detail">
+                      <label class="badge bg-gray btn btn-block mt-1 label-check">
+                        <input id="ldCuestionarioResuelto" name="ldCuestionarioResuelto" type="checkbox"> Cuestionario con respuestas
                       </label>
                     </div>
                   </div>
@@ -592,8 +705,8 @@
           </table>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-primary"><i class="fa fa-print text-white"></i> Imprimir</button>
+          <button type="button" class="btn btn-secondary cancel-pdf" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary create-pdf"><i class="fa fa-print text-white"></i> Crear PDF</button>
         </div>
       </div>
     </form>
