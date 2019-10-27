@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/datatables/css/dataTable.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/morris.js/morris.css">
 </head>
-<body class="hold-transition skin-light sidebar-mini">
+<body class="sidebar-mini fixed layout-boxed skin-black-light">
 
   <!-- =====================.INICIO DEL DIV QUE CONTIENE TODO ========================== -->
   <div class="wrapper">
@@ -56,8 +56,8 @@
               <!---------- USER ACOUNT DETAIL ------------->
               <ul class="dropdown-menu">
                 <li class="user-header">
-                  <img src="<?php echo base_url(); ?>assets/img/android-happy.png" class="img-circle circle-black" >
-                  <p class="text-black">
+                  <img src="<?php echo base_url(); ?>assets/img/android-happy.png" class="img-circle circle-white" >
+                  <p class="text-white">
                     <?php 
                       if($this->session->userdata('USER_NAME') != ''){
                         echo ucwords($this->session->userdata('USER_NAME'));
@@ -89,7 +89,7 @@
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <a  href="<?php echo site_url('Welcome/logout');?>" class="btn bg-red btn-flat ol--xl-12 col-lg-12 col-md-12 col-sm-12 col-12">Cerrar sesión</a>
+                    <a  href="<?php echo site_url('Welcome/logout');?>" class="btn bg-azul btn-flat ol--xl-12 col-lg-12 col-md-12 col-sm-12 col-12">Cerrar sesión</a>
                   </div>
                 </li>
               </ul>

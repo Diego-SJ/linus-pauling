@@ -1,6 +1,6 @@
 <?php $index = 1; $treactivos = 0; $total_items = 0?>
 <!-- =====================.INICIO CONTENIDO ========================== -->
-<div class="content-wrapper theme-2">
+<div class="content-wrapper <?php echo $this->session->userdata('USER_THEME'); ?>">
   <section class="content">
     <div class="row">
       <!-- LECTURA DETAIL -->

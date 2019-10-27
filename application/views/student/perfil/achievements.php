@@ -1,5 +1,5 @@
 <!-- start -->
-<div class="content-wrapper theme-3">
+<div class="content-wrapper <?php echo $this->session->userdata('USER_THEME'); ?>-achieve">
 
     <section class="content">
         <div class="row">

@@ -1,21 +1,100 @@
 /*TEMAS*/
 .theme-1 {
-      background-image: url("http://192.168.64.2/kids/assets/img/theme/bg-theme2.jpg");
-      background-repeat: repeat;
-      background-size: 100% 100%;
+      background-image: url("http://192.168.64.2/kids/assets/img/theme/theme_1.jpg") !important;
+      background-repeat: repeat !important;
+      background-size: 100% 100% !important;
 }
 .theme-2 {
-      background-image: url("http://192.168.64.2/kids/assets/img/theme/bg-theme2.jpg");
-      background-repeat: repeat;
-      background-size: 100% 100%;
+      background-image: url("http://192.168.64.2/kids/assets/img/theme/theme_2.png") !important;
+      background-repeat: repeat !important;
+      background-size: 100% 100% !important;
 }
-.theme-3 {
-  background-color: #1f2b36;
+.theme-3{
+      background-image: url("http://192.168.64.2/kids/assets/img/theme/theme_3.png") !important;
+      background-repeat: repeat !important;
+      background-size: 100% 100% !important;
 }
-.theme-slide-2 {
-      background-image: url("http://192.168.64.2/kids/assets/img/theme/bg-theme2.jpg");
-      background-repeat: repeat;
-      background-size: 1500px 100%;
+.theme-4{
+      background-image: url("http://192.168.64.2/kids/assets/img/theme/theme_4.jpg") !important;
+      background-repeat: repeat !important;
+      background-size: 100% 100% !important;
+}
+.theme-5 {
+  background-image: url("http://192.168.64.2/kids/assets/img/theme/theme_5.png") !important;
+  background-repeat: repeat !important;
+  background-size: 100% 100% !important;
+}
+.theme-6{
+  background-image: url("http://192.168.64.2/kids/assets/img/theme/theme_6.png") !important;
+  background-repeat: repeat !important;
+  background-size: 100% 100% !important;
+}
+.theme-7{
+  background-image: url("http://192.168.64.2/kids/assets/img/theme/theme_7.png") !important;
+  background-repeat: repeat !important;
+  background-size: 100% 100% !important;
+}
+.theme-1-slide {
+  background-image: url("http://192.168.64.2/kids/assets/img/theme/theme_1.jpg") !important;
+  background-repeat: repeat !important;
+  background-size: 1500px 100% !important;
+}
+.theme-2-slide {
+  background-image: url("http://192.168.64.2/kids/assets/img/theme/theme_2.png") !important;
+  background-repeat: repeat !important;
+  background-size: 1500px 100% !important;
+}
+.theme-3-slide{
+  background-image: url("http://192.168.64.2/kids/assets/img/theme/theme_3.png") !important;
+  background-repeat: repeat !important;
+  background-size: 1500px 100% !important; 
+}
+.theme-4-slide{
+  background-image: url("http://192.168.64.2/kids/assets/img/theme/theme_4.jpg") !important;
+  background-repeat: repeat !important;
+  background-size: 1500px 100% !important;
+}
+.theme-5-slide {
+  background-image: url("http://192.168.64.2/kids/assets/img/theme/theme_5.png") !important;
+  background-repeat: repeat !important;
+  background-size: 1500px 100% !important;
+}
+.theme-6-slide{
+  background-image: url("http://192.168.64.2/kids/assets/img/theme/theme_6.png") !important;
+  background-repeat: repeat !important;
+  background-size: 1500px 100% !important; 
+}
+.theme-7-slide{
+  background-image: url("http://192.168.64.2/kids/assets/img/theme/theme_7.png") !important;
+  background-repeat: repeat !important;
+  background-size: 1500px 100% !important;
+}
+.theme-1-achieve {
+  background: rgb(30, 38, 48) !important;
+}
+.theme-2-achieve {
+  background: #00a2ff !important;
+}
+.theme-3-achieve{
+  background: #006781 !important;
+}
+.theme-4-achieve{
+  background: #ffbb00 !important;
+}
+.theme-5-achieve {
+  background: #d3d3d3 !important;
+}
+.theme-6-achieve{
+  background: #351385 !important;
+}
+.theme-7-achieve{
+  background: #0e8baa !important;
+}
+.hover-slide-menu-item{
+  background: rgba(255, 255, 255, 0) !important;
+}
+.hover-slide-menu-item:hover{
+  background: rgba(105, 105, 105, 0.795) !important;
 }
 .bot_message_blue{
     color: #29b7db;
@@ -671,4 +750,14 @@
   margin: 10px 0px 0px 0px;
   width: 100%;
   border: 1px solid #b8ceff !important;
+}
+
+.hover-user-menu{
+  background: rgba(0, 0, 0, 0) !important;
+  color: #000;
+}
+
+.hover-user-menu:hover{
+  background: rgba(31, 31, 31, 0.315) !important;
+  color: #000;
 }

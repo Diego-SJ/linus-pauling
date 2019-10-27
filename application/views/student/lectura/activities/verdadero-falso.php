@@ -1,5 +1,5 @@
 <!-- =====================.INICIO CONTENIDO ========================== -->
-<div class="content-wrapper theme-2">
+<div class="content-wrapper <?php echo $this->session->userdata('USER_THEME'); ?>">
   <!--=========== Content Header (Page header) =========== -->
   <section class="content">
     <div class="row">

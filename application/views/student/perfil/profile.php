@@ -1,7 +1,7 @@
 
 
 <!-- =====================.INICIO CONTENIDO ========================== -->
-<div class="content-wrapper theme-2">
+<div class="content-wrapper <?php echo $this->session->userdata('USER_THEME'); ?>">
 
     <?php if($this->session->userdata('USER_SESSION') == ''){  ?>
     <script type="text/javascript">
@@ -345,18 +345,13 @@
                       <input type="text" name="idAlumno" value="<?php if(!empty($student_info)){ echo ($student_info->idAlumno);}?>" hidden>
 
                       <select class="form-control" id="pick_thee" name="pick_thee">
-                        <option value="skin-blue">Azul</option>
-                        <option value="skin-black">Negro</option>
-                        <option value="skin-purple">Morado</option>
-                        <option value="skin-green">Verde</option>
-                        <option value="skin-red">Rojo</option>
-                        <option value="skin-yellow">Amarillo</option>
-                        <!-- <option value="skin-blue-light">Azul light</option>
-                        <option value="skin-black-light">Negro ligth</option>
-                        <option value="skin-purple-light">Morado ligth</option>
-                        <option value="skin-green-light">Verde ligth</option>
-                        <option value="skin-red-light">Rojo ligth</option>
-                        <option value="skin-yellow-light">Amarillo ligth</option> -->
+                        <option value="theme-1">Espacio</option>
+                        <option value="theme-2">Playa</option>
+                        <option value="theme-3">Montañas</option>
+                        <option value="theme-4">Helado</option>
+                        <option value="theme-5">Lucha</option>
+                        <option value="theme-6">Noche</option>
+                        <option value="theme-7">Avión</option>
                       </select>
                     </div>
                   </div>

@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/iCheck/all.css">
 
 </head>
-<body class="hold-transition <?php echo $this->session->userdata('USER_THEME'); ?> sidebar-mini" >
+<body class="sidebar-mini fixed layout-boxed sidebar-collapse">
 
   <!-- =====================.INICIO DEL DIV QUE CONTIENE TODO ========================== -->
   <div class="wrapper">
@@ -25,11 +25,11 @@
     <header class="main-header">
       <!-- LOGO -->
       <a href="<?php echo base_url(); ?>Web/Home" class="logo">
-        <span class="logo-mini"><b>A</b>L</span>
-        <span class="logo-lg"><b>App</b>Lecturas</span>
+        <span class="logo-mini text-white"><b>A</b>L</span>
+        <span class="logo-lg text-white"><b>App</b>Lecturas</span>
       </a>
       <nav class="navbar navbar-static-top">
-        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <a href="#" class="sidebar-toggle text-white" data-toggle="push-menu" role="button">
           <span class="sr-only">Toggle navigation</span>
         </a>
 
@@ -37,14 +37,14 @@
           <ul class="nav navbar-nav">
             <li class="dropdown user user-menu">
               <!------------ USER ACOUNT ----------------->
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <a href="#" class="dropdown-toggle hover-user-menu" data-toggle="dropdown">
                 <?php if($this->session->userdata('USER_GENDER') != '' && 
                           $this->session->userdata('USER_GENDER') == 'masculino'): ?>
                 <img src="<?php echo base_url(); ?>assets/img/chico.png" class="user-image circle-white" >
                 <?php else: ?>
                 <img src="<?php echo base_url(); ?>assets/img/chica.png" class="user-image circle-white" >
                 <?php endif ?>
-                <span class="hidden-xs">
+                <span class="hidden-xs text-white">
                   <?php 
                     if($this->session->userdata('USER_NAME') != ''){
                       echo ucwords($this->session->userdata('USER_NAME_C'));
@@ -64,7 +64,7 @@
                   <?php else: ?>
                     <img src="<?php echo base_url(); ?>assets/img/chica.png" class="img-circle circle-white" >
                   <?php endif ?>
-                  <p>
+                  <p class="text-black">
                     <?php 
                       if($this->session->userdata('USER_NAME') != ''){
                         echo ucwords($this->session->userdata('USER_NAME_C'));
@@ -102,7 +102,7 @@
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <a  href="<?php echo site_url('Welcome/logout');?>" class="btn bg-red btn-flat ol--xl-12 col-lg-12 col-md-12 col-sm-12 col-12">Cerrar sesión</a>
+                    <a  href="<?php echo site_url('Welcome/logout');?>" class="btn bg-azul btn-flat ol--xl-12 col-lg-12 col-md-12 col-sm-12 col-12">Cerrar sesión</a>
                   </div>
                 </li>
               </ul>
@@ -117,7 +117,7 @@
     </header>
 
     <!-- MENU DESPLEGABLE DE INICIO -->
-    <aside class="main-sidebar theme-slide-2" style="border: 0;">
+    <aside class="main-sidebar <?php echo $this->session->userdata('USER_THEME'); ?>-slide" style="border: 0;">
 
       <!-- SUB MENU -->
       <section class="sidebar">
@@ -133,7 +133,7 @@
             <?php endif ?>
           </div>
           <div class="pull-left info">
-            <p>
+            <p class="text-white">
               <?php 
                   if($this->session->userdata('USER_USER') != ''){
                     echo ucfirst($this->session->userdata('USER_USER'));
@@ -142,32 +142,32 @@
                   }
                ?>
             </p>
-            <a><i class="fa fa-circle text-verde"></i> Activo</a>
+            <a class="text-white"><i class="fa fa-circle text-verde"></i> Activo</a>
           </div>
         </div>
         <ul class="sidebar-menu" data-widget="tree">
           <li>
-            <a href="<?php echo base_url(); ?>Movil/Home" class="">
+            <a href="<?php echo base_url(); ?>Movil/Home" class="hover-slide-menu-item">
               <i class="fa fa-home text-white"></i> <span class="text-white">INICIO</span>
             </a>
           </li>
           <li>
-            <a href="<?php echo base_url(); ?>Movil/Lecturas">
+            <a href="<?php echo base_url(); ?>Movil/Lecturas" class="hover-slide-menu-item">
               <i class="fa fa-book text-white"></i> <span class="text-white">LECTURAS</span>
             </a>
           </li>
           <li>
-            <a href="<?php echo base_url(); ?>Movil/Logros">
+            <a href="<?php echo base_url(); ?>Movil/Logros" class="hover-slide-menu-item">
               <i class="fa fa-trophy text-white"></i> <span class="text-white">LOGROS</span>
             </a>
           </li>
           <li>
-            <a href="<?php echo base_url(); ?>Movil/Perfil">
+            <a href="<?php echo base_url(); ?>Movil/Perfil" class="hover-slide-menu-item">
               <i class="fa fa-user text-white"></i> <span class="text-white">PERFIL</span>
             </a>
           </li>
           <li>
-            <a href="<?php echo site_url('Welcome/logout');?>">
+            <a href="<?php echo site_url('Welcome/logout');?>" class="hover-slide-menu-item">
               <i class="fa fa-sign-out text-white"></i> <span class="text-white">CERRAR SESIÓN</span>
             </a>
           </li>

@@ -1,7 +1,7 @@
 
 
 <!-- =====================.INICIO CONTENIDO ========================== -->
-<div class="content-wrapper theme-2">
+<div class="content-wrapper <?php echo $this->session->userdata('USER_THEME'); ?>">
 
     <?php if($this->session->userdata('USER_SESSION') == ''){  ?>
     <script type="text/javascript">

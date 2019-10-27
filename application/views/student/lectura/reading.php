@@ -76,7 +76,7 @@
 		}
 	</style>
 </head>
-<body class="theme-1">
+<body class="<?php echo $this->session->userdata('USER_THEME'); ?>">
 	
 	<center>
 		<table class="atern-top-info">
