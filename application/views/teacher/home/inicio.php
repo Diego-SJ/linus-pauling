@@ -567,89 +567,27 @@
                     <h4>Selecciona los datos que deseas imprimir</h4>
                     <div class="col-md-4 col-sm-6 col-xs-6">
                       <label class="badge bg-gray btn btn-block mt-1 label-check">
-                        <input id="aGrado" name="aGrado" type="checkbox"> Detalle lecturas completadas
+                        <input id="adLogros" name="adLogros" type="checkbox"> Logros
                       </label>
                     </div>
                     <div class="col-md-4 col-sm-6 col-xs-6">
                       <label class="badge bg-gray btn btn-block mt-1 label-check">
-                        <input id="aNombre" name="aNombre" type="checkbox"> Nombre
+                        <input id="adDetalles" name="adDetalles" type="checkbox"> Lecturas completadas
                       </label>
                     </div>
                     <div class="col-md-4 col-sm-6 col-xs-6">
                       <label class="badge bg-gray btn btn-block mt-1 label-check">
-                        <input id="aApellP" name="aApellP" type="checkbox"> Apellido paterno
+                        <input id="adResultados" name="adResultados" type="checkbox"> Resultados
                       </label>
                     </div>
                     <div class="col-md-4 col-sm-6 col-xs-6">
                       <label class="badge bg-gray btn btn-block mt-1 label-check">
-                        <input id="aApellM" name="aApellM" type="checkbox"> Apellido materno
-                      </label>
-                    </div>
-                    <div class="col-md-4 col-sm-6 col-xs-6">
-                      <label class="badge bg-gray btn btn-block mt-1 label-check">
-                        <input id="aUsuario" name="aUsuario" type="checkbox"> Usuario
-                      </label>
-                    </div>
-                    <div class="col-md-4 col-sm-6 col-xs-6">
-                      <label class="badge bg-gray btn btn-block mt-1 label-check">
-                        <input id="aPassword" name="aPassword" type="checkbox"> Contraseña
-                      </label>
-                    </div>
-                    
-                    <div class="col-md-4 col-sm-6 col-xs-6">
-                      <label class="badge bg-gray btn btn-block mt-1 label-check">
-                        <input id="aGrupo" name="aGrupo" type="checkbox"> Grupo
-                      </label>
-                    </div>
-                    <div class="col-md-4 col-sm-6 col-xs-6">
-                      <label class="badge bg-gray btn btn-block mt-1 label-check">
-                        <input id="aLecturas" name="aLecturas" type="checkbox"> Lecturas completadas
-                      </label>
-                    </div>
-                    <div class="col-md-4 col-sm-6 col-xs-6">
-                      <label class="badge bg-gray btn btn-block mt-1 label-check">
-                        <input id="aAciertos" name="aAciertos" type="checkbox"> Aciertos totales
-                      </label>
-                    </div>
-                    <div class="col-md-4 col-sm-6 col-xs-6">
-                      <label class="badge bg-gray btn btn-block mt-1 label-check">
-                        <input id="aIncorrectos" name="aIncorrectos" type="checkbox"> Incorrectos totales
-                      </label>
-                    </div>
-                    <div class="col-md-4 col-sm-6 col-xs-6">
-                      <label class="badge bg-gray btn btn-block mt-1 label-check">
-                        <input id="aPromedio" name="aPromedio" type="checkbox"> Promedio general
+                        <input id="adAprovechamiento" name="adAprovechamiento" type="checkbox"> Aprovechamiento
                       </label>
                     </div>
                   </div>
                 </td>
               </tr>
-              
-              <tr>
-                <td>
-                  <div class="row">
-                    <h4>Ordenar por:</h4>
-                    <div class="col-md-6 col-xs-6">
-                      <select id="lecturasFiltro" name="lecturasFiltro" class="form-control">
-                        <option value="0">- elije un filtro -</option>
-                        <option id="opt1l" hidden="hidden" value="titulo">Título</option>
-                        <option id="opt2l" hidden="hidden" value="autor">Autor</option>
-                        <option id="opt3l" hidden="hidden" value="desc_corta">Descripción</option>
-                        <option id="opt4l" hidden="hidden" value="fecha_creacion">Fecha creación</option>
-                        <option id="opt5l" hidden="hidden" value="tipo_lectura">Tipo lectura</option>
-                        <!-- <option id="opt6l" hidden="hidden" value="attemps">Reactivos</option> -->
-                      </select>
-                    </div>
-                    <div class="col-md-6 col-xs-6">
-                      <select id="lecturasOrder" name="lecturasOrder" class="form-control">
-                        <option value="asc">ascendente</option>
-                        <option value="desc">descendente</option>
-                      </select>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-
             </tbody>
           </table>
         </div>

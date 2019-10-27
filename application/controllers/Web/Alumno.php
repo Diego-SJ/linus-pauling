@@ -180,4 +180,47 @@ class Alumno extends CI_Controller {
 
         echo json_encode($json);
     }
+
+    public function getDataChart2(){
+        $idAlumno = $this->input->post("idAlumno");
+
+        $categorias = $this->Indicadores_model->getCategories();
+        $correctas  = $this->Alumno_model->getCorrectsChart2($idAlumno);
+        $incorrectas = $this->Alumno_model->getIncorrectsChart2($idAlumno);
+
+        $json = array();
+        $num_ac = 0;
+        $num_inc = 0;
+        foreach($categorias as $row){
+
+            foreach($correctas as $row2){
+                if($row->nombre == $row2->nombre){
+                    $num_ac = $row2->correctas;
+                } 
+            }
+
+            foreach($incorrectas as $row3){
+                if($row->nombre == $row3->nombre){
+                    $num_inc = $row3->incorrectas;
+                } 
+            }
+            
+            $data = array(
+                'idCategoria' => $row->idCategoria,
+                'categoria' => $row->nombre,
+                'correctas' => $num_ac,
+                'incorrectas' => $num_inc,
+                'percent'  => ($num_ac == 0 && $num_inc == 0)?0:round((100/($num_ac+$num_inc))*$num_ac),
+            );
+            
+            $json[] = $data;
+
+            unset($data);
+            $num_inc = 0;
+            $num_ac = 0;
+            $percent = 0;
+        }
+
+        echo json_encode($json);
+    }
 }

@@ -16,129 +16,55 @@
 
   <section class="content">
     <div class="row">
-      <!-- /.col -->
-      <div class="col-md-4">
 
-        <?php if (!empty($alumno)): ?>
-          <div class="box box-widget widget-user">
-            <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header bg-azul">
-              <h5 class="widget-user-username"><?php echo ucwords($alumno->nombre." ".$alumno->a_paterno." ".$alumno->a_materno); ?></h5>
-            </div>
-            <div class="widget-user-image">
-                <?php if($alumno->genero == ("masculino")): ?>
-                <img class="img-circle bg-yellow" src="<?php echo base_url(); ?>assets/img/chico.png" alt="User Avatar">
-                <?php else: ?>
-                  <img class="img-circle bg-yellow" src="<?php echo base_url(); ?>assets/img/chica.png" alt="User Avatar">
-                <?php endif ?>
+      <div class="col-md-4 col-sm-12 col-xs-12">
+          <div class="box box-primary">
+              <div class="box-body box-profile">
+                  <img class="profile-user-img img-responsive img-circle" src=" <?php if($alumno->genero == ("masculino") && !empty($alumno)){echo base_url().'assets/img/chico.png';}else{echo base_url().'assets/img/chica.png';} ?>" alt="User profile picture">
+                  <h3 class="profile-username text-center"><?php if(!empty($alumno)){echo ucwords($alumno->nombre." ".$alumno->a_paterno." ".$alumno->a_materno);} ?></h3>
+                  <h4 class="text-muted text-azuld text-center"><?php if(!empty($alumno)){echo "Grado y grupo: ".$alumno->grado." ".$alumno->grupo;} ?></h4>
               </div>
-              <div class="box-footer">
-                <div class="row">
-                  <div class="col-sm-6 border-right">
-                    <div class="description-block">
-                      <h5 class="description-header"><?php echo $alumno->grado; ?></h5>
-                      <span class="description-text">Grado</span>
-                    </div>
-                    <!-- /.description-block -->
-                  </div>
-                  <!-- /.col -->
-                  <div class="col-sm- border-right">
-                    <div class="description-block">
-                      <h5 class="description-header"><?php echo strtoupper($alumno->grupo); ?></h5>
-                      <span class="description-text">Grupo</span>
-                    </div>
-                    <!-- /.description-block -->
-                  </div>
+              <div class="box-footer no-padding">
+                  <ul class="nav nav-stacked">
+                      <li>
+                        <a><i class="fa fa-bookmark"></i> Lecturas completadas <span class="pull-right badge bg-azul">
+                        <?php if(!empty($alumno_detail)){echo $alumno_detail->lecturas;} else {echo "0";} ?></span>
+                        </a>
+                      </li>
+                      <li>
+                        <a><i class="fa fa-check-circle"></i> Total de aciertos <span class="pull-right badge bg-verde">
+                        <?php if(!empty($alumno_detail)){echo $alumno_detail->aciertos;} else {echo "0";} ?></span>
+                        </a>
+                      </li>
+                      <li>
+                        <a><i class="fa fa-times-circle"></i> Total de incorrectos <span class="pull-right badge bg-red">
+                        <?php if(!empty($alumno_detail)){echo $alumno_detail->incorrectos;} else {echo "0";} ?></span>
+                        </a>
+                      </li>
+                      <li>
+                        <a><i class="fa fa-graduation-cap"></i> Promedio general<span class="pull-right badge bg-yellow">
+                        <?php if(!empty($alumno_detail)){echo $alumno_detail->promedio;} else {echo "0";} ?></span>
+                        </a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
 
-                  <!-- /.col -->
+      <div class="col-md-8 col-sm-12 col-xs-12">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body box-profile">
+                    <h3 class="profile-username text-center">Aprovechamiento</h3>
                 </div>
-                <!-- /.row -->
-              </div>
-            </div>
-          <?php endif ?>
-
-        </div>
-
-        <div class="col-md-4 col-sm-4 col-xs-4">
-          <div class="info-box bg-azul">
-            <span class="info-box-icon"><i class="fa fa-bookmark"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Lecturas completadas</span>
-              <span class="info-box-number">
-                <?php if(!empty($alumno_detail)){echo $alumno_detail->lecturas;} else {echo "0";} ?>
-              </span>
-              <div class="progress">
-                <div class="progress-bar" style="width: 100%"></div>
-              </div>
-              <span class="progress-description">
-                en curso
-              </span>
+                <div class="box-footer no-padding">
+                  <div class="chart" id="bar-chart" style="height: 300px; padding: 0px; position: relative;"></div>
+                </div>
             </div>
           </div>
         </div>
-
-        <div class="col-md-4 col-sm-4 col-xs-4">
-          <div class="info-box bg-verde">
-            <span class="info-box-icon"><i class="fa  fa-check-circle"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Total de aciertos</span>
-              <span class="info-box-number">
-                <?php if(!empty($alumno_detail)){echo $alumno_detail->aciertos;} else {echo "0";} ?>
-              </span>
-              <div class="progress">
-                <div class="progress-bar" style="width: 100%"></div>
-              </div>
-              <span class="progress-description">
-                en curso
-              </span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-
-        <div class="col-md-4 col-sm-4 col-xs-4">
-          <div class="info-box bg-yellow">
-            <span class="info-box-icon"><i class="fa fa-graduation-cap"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">PROMEDIO</span>
-              <span class="info-box-number">
-                <?php if(!empty($alumno_detail)){echo $alumno_detail->promedio;} else {echo "0";} ?>
-              </span>
-              <div class="progress">
-                <div class="progress-bar" style="width: 100%"></div>
-              </div>
-              <span class="progress-description">
-                prom. general
-              </span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-
-        <div class="col-md-4 col-sm-4 col-xs-4">
-          <div class="info-box bg-red">
-            <span class="info-box-icon"><i class="fa fa-times-circle"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">TOTAL DE INCORRECTAS</span>
-              <span class="info-box-number">
-                <?php if(!empty($alumno_detail)){echo $alumno_detail->incorrectos;} else {echo "0";} ?>
-              </span>
-              <div class="progress">
-                <div class="progress-bar" style="width: 100%"></div>
-              </div>
-              <span class="progress-description">
-                en curso
-              </span>
-            </div>
-          </div>
-        </div>
-
+      </div>
     </div>
 
 
@@ -198,4 +124,54 @@
     </div>
   </section>
 
+  <input id="bu" type="hidden" value="<?php echo base_url(); ?>" class="question_hidden">
+  <input id="idAlumno" type="hidden" value="<?php if(!empty($alumno)){echo $alumno->idAlumno;} ?>" class="question_hide">
+
 </div>
+
+<script>
+  $(function (){
+
+    let baseUrl = $('#bu').val();
+    let idAlumno = $('#idAlumno').val();
+    console.log(baseUrl+"-"+idAlumno);
+
+    const data = {
+        idAlumno: idAlumno
+    };
+    $.post(
+        baseUrl+"Web/Alumno/getDataChart2",
+        data,
+        (resp) => {
+            let result = JSON.parse(resp);
+            console.log(result);
+
+            let dataChartBar = [];
+
+            result.forEach(row => {
+                // chart bar
+                var objectBar = {
+                    y: row.categoria,
+                    a: row.percent
+                } 
+                dataChartBar.push(objectBar);
+            });
+
+            console.log(dataChartBar);
+
+            //BAR CHART
+            var bar = new Morris.Bar({
+              element: 'bar-chart',
+              resize: true,
+              data: dataChartBar,
+              barColors: ['#03cf58'],
+              xkey: 'y',
+              ykeys: ['a'],
+              labels: ['% de aprovechamiento'],
+              hideHover: 'auto'
+            });
+        }
+    );
+    
+  })
+</script>

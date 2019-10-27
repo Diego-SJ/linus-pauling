@@ -95,4 +95,29 @@ class Alumno_model extends CI_Model {
                                 GROUP BY AC.idCategoria");
         return $result->result();
     }
+
+    public function getCorrectsChart2($idAlumno){
+        $result = $this->db->query("
+                        SELECT 
+                        COUNT(AC.status) as correctas,
+                        C.nombre,
+                        AC.idCategoria
+                        FROM Answers_Categorias AC
+                        INNER JOIN Categorias C ON C.idCategoria = AC.idCategoria
+                        WHERE AC.status = 'correct' and AC.idAlumno = '".$idAlumno."'
+                        GROUP BY AC.idCategoria");
+        return $result->result();
+    }
+    public function getIncorrectsChart2($idAlumno){
+        $result = $this->db->query("
+                                SELECT 
+                                COUNT(AC.status) as incorrectas,
+                                C.nombre,
+                                AC.idCategoria
+                                FROM Answers_Categorias AC
+                                INNER JOIN Categorias C ON C.idCategoria = AC.idCategoria
+                                WHERE AC.status = 'incorrect' and AC.idAlumno = '".$idAlumno."'
+                                GROUP BY AC.idCategoria");
+        return $result->result();
+    }
 }
