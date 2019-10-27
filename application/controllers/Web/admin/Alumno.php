@@ -5,7 +5,7 @@ class Alumno extends CI_Controller {
 
     public function __construct(){
         parent:: __construct();
-        $this->load->model("Web/Alumno_model");
+        $this->load->model("Web/admin/Alumno_model");
         $this->load->model("Web/admin/Indicadores_model");
         if($this->session->userdata('USER_ID') == '' || $this->session->userdata('USER_TYPE') != '3') {  
             redirect(base_url().'Welcome');  
@@ -13,11 +13,12 @@ class Alumno extends CI_Controller {
     }
 
 	public function index(){
-        $id_usuario = $this->session->userdata('USER_ID');
-        $data = array( 'alumnos' => $this->Alumno_model->getAlumnosByTeacher($id_usuario) );
-        $this->load->view('layouts/header');
-        $this->load->view('teacher/alumno/alumnos', $data);
-        $this->load->view('layouts/footer');
+        $data = array( 
+            'alumnos'       => $this->Alumno_model->getAllAlumnos(),
+        );
+        $this->load->view('admin/layouts/header');
+        $this->load->view('admin/alumno/alumnos', $data);
+        $this->load->view('admin/layouts/footer');
 	}
 
     public function detail($id_alumno){

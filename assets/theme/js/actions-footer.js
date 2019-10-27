@@ -100,6 +100,31 @@ $("#tabla_alumnos_teacher_detail").DataTable({
     }
 });
 
+//BEST STUDENTS
+$("#the_best_students").DataTable({
+    'paging'      : true,
+    'lengthChange': false,
+    'searching'   : false,
+    'ordering'    : true,
+    'info'        : false,
+    'autoWidth'   : true,
+    "language": {
+        "lengthMenu": "Mostrar _MENU_",
+        "zeroRecords": "No se encontraron resultados en su busqueda",
+        "searchPlaceholder": "Buscar lectura",
+        "info": "alumnos _START_ al _END_ de un total de  _TOTAL_ alumnos",
+        "infoEmpty": "Aún no existen registros",
+        "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+        "search": "Buscar:",
+        "paginate": {
+            "first": "Primero",
+            "last": "Último",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        },
+    }
+});
+
 //ESTILO TABLA ALUMNOS ADMIN
 $("#tabla_alumnos_by_lectura_admin").DataTable({
     "language": {

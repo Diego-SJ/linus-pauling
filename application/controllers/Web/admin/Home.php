@@ -6,6 +6,7 @@ class Home extends CI_Controller {
     public function __construct(){
         parent:: __construct();
         $this->load->model("Web/admin/Home_model");
+        $this->load->model("Web/admin/Alumno_model");
     }
 
     public function index(){
@@ -15,6 +16,7 @@ class Home extends CI_Controller {
             't_alumno' => $this->Home_model->getTotalAlumnos(), 
             't_Lecturas' => $this->Home_model->getTotaLecturas(), 
             't_Docentes' => $this->Home_model->getTotalDocentes(), 
+            'best_students' => $this->Alumno_model->getBestTweenty(),
           );
 
           $this->load->view('admin/layouts/header');

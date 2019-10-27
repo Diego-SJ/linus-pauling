@@ -140,6 +140,11 @@
             </a>
           </li>
           <li>
+            <a href="<?php echo base_url(); ?>Web/admin/Alumno" class="text-black">
+              <i class="fa fa-users"></i> <span>ALUMNOS</span>
+            </a>
+          </li>
+          <li>
             <a href="<?php echo base_url(); ?>Web/admin/Indicadores" class="text-black">
               <i class="fa fa-cogs"></i> <span>INDICADORES</span>
             </a>

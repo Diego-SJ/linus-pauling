@@ -16,7 +16,7 @@
 
     <section class="content">
         <div class="row">
-          <div class="col-lg-3 col-xs-6">
+          <div class="col-lg-4 col-xs-6">
             <!-- small box -->
             <div class="small-box bg-azul">
               <div class="inner">
@@ -38,12 +38,7 @@
               <a class="small-box-footer"> Total de alumnos registrados <i class="fa fa-info-circle"></i></a>
             </div>
           </div>
-
-    
-
-          <!-- ./col -->
-          <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
+          <div class="col-lg-4 col-xs-6">
             <div class="small-box bg-verde">
               <div class="inner">
                 <h3>
@@ -62,17 +57,10 @@
               <a class="small-box-footer"> Total lecturas registradas <i class="fa fa-info-circle"></i></a>
             </div>
           </div>
-
-          <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
+          <div class="col-lg-4 col-xs-6">
             <div class="small-box bg-red">
               <div class="inner">
-                <h3>
-                  <?php
-                if(!empty($t_Docentes)){ echo $t_Docentes->total_docente;
-                } else {  echo "0"; } ?>    
-                </h3>
-
+                <h3><?php if(!empty($t_Docentes)){ echo $t_Docentes->total_docente; } else {  echo "0"; } ?></h3>
                 <p>Profesores</p>
               </div>
               <div class="icon">
@@ -80,91 +68,51 @@
               </div>
               <a href="<?php echo site_url('Web/admin/Docente')?>" class="small-box-footer"> Más información <i class="fa fa-arrow-circle-right"></i></a>
             </div>
-    </div>
-          <!-- ./col -->
-          <!-- ./col -->
-            <!-- small box -->
-          
-       <!--  <div class="row">
-        <div class="col-md-6">
-          <div class="box box-solid">
-            <div class="box-header with-border">
-              <h3 class="box-title">Vertical Progress Bars Different Sizes</h3>
-            </div>
-            <div class="box-body text-center">
-              <p>By adding the class <code>.vertical</code> and <code>.progress-sm</code>, <code>.progress-xs</code> or
-                <code>.progress-xxs</code> we achieve:</p>
-
-              <div class="progress vertical active">
-                <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="height: 40%">
-                  <span class="sr-only">40%</span>
-                </div>
-              </div>
-              <div class="progress vertical progress-sm">
-                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="height: 100%">
-                  <span class="sr-only">100%</span>
-                </div>
-              </div>
-              <div class="progress vertical progress-xs">
-                <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="height: 60%">
-                  <span class="sr-only">60%</span>
-                </div>
-              </div>
-              <div class="progress vertical progress-xxs">
-                <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="height: 60%">
-                  <span class="sr-only">60%</span>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
-      </div> -->
 
-
+        <div class="row">
+          <div class="col-md-6">
+              <div class="box box-primary">
+                  <div class="box-body">
+                      <h3>Los mejores 20</h3>
+                      <table id="the_best_students" class="table table-bordered table-hover">
+                          <thead class="bg-primary">
+                              <tr>
+                                  <th class="text-center">#</th>
+                                  <th class="text-center">Nombre</th>
+                                  <th class="text-center">Grado</th>
+                                  <th class="text-center">Grupo</th>
+                                  <th class="text-center">Promedio</th>
+                                  <th class="text-center">Ver</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                          <?php $indice = 1; ?>
+                          <?php if(!empty($best_students)): ?>
+                          <?php foreach($best_students as $alumno): ?>
+                              <tr>
+                                  <td class="text-center"><?php echo $indice++; ?></td>
+                                  <td class="text-center"><?php echo $alumno->alumno ?></td>
+                                  <td class="text-center"><?php echo $alumno->grado; ?></td>
+                                  <td class="text-center"><?php echo $alumno->grupo; ?></td>
+                                  <td class="text-center"><?php echo $alumno->promedio; ?></td>
+                                  <td class="text-center">
+                                      <a href="<?php echo site_url('Web/admin/Alumno/detail');?>/<?php echo $alumno->idAlumno; ?>" class="btn btn-verde">
+                                          <span class="fa fa-eye text-white"></span>
+                                      </a>
+                                  </td>
+                              </tr>
+                          <?php endforeach ?>
+                          <?php endif ?>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+        </div>
     </section>
-</div>
 
-<div id="exampleModalLive" class="modal fade" tabindex="-1" role="dialog"
-aria-labelledby="exampleModalLiveLabel" aria-hidden="true">
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header  bg-blue" style="color: white;">
-            <h3 class="modal-title" id="exampleModalLiveLabel"><i class="fa fa-book"></i> Agregar nueva lectura</h3>
-        </div>
-        <div class="modal-body">
-            <form method="POST" action="<?php echo site_url('Web/Lecturas/addLectura')?>">
-                <div class="form-group">
-                    <label for="frm_titulo" class="col-form-label">Título</label>
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                        <input type="text" name="frm_titulo" class="form-control" placeholder="título de la lectura" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="frm_autor" class="col-form-label">Autor</label>
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                        <input type="text" name="frm_autor" class="form-control" placeholder="autor de la lectura" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="frm_desc_corta" class="col-form-label">Descripción corta</label>
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-comments"></i></span>
-                        <textarea class="form-control" name="frm_desc_corta" placeholder="Pequeña introducción de la lectura." required></textarea>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar</button>
-                    <a class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times-circle"></i> Cancelar</a>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 </div>
 <!-- =====================.FIN CONTENIDO ========================== -->
 
