@@ -76,7 +76,7 @@ class Lecturas extends CI_Controller {
                 'paginas'        => $this->Pagina_model->getPaginasLectura($id_lectura),
                 'info_file'      => $this->Fichero_model->getPdf($id_lectura) 
             );
-            $this->load->view('student/lectura/reading');
+            $this->load->view('student/lectura/reading',$data);
         } else {
             redirect(base_url()."Movil/Lecturas");
         }
