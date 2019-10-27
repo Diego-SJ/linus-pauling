@@ -174,7 +174,6 @@ $("#gen_ninia").on("click", function(){
 //VERIFICAR QUE LOS CAMPOS NO ESTE VACIOS
 $(".reg-alumno").on("click", function(){
     $("#btn-ana-success").attr("disabled", "disabled");
-    $("#rna_nombre").attr("disabled", false);
     $("#desc_na").show();
 });
 var check,nombre, paterno, materno, grado, grupo, dataAlumno;
@@ -184,24 +183,34 @@ $("#form_rna .req").keyup(function() {
     check = checkCampos(form);
 });
 
-$("#rna_clickhere").on("click", function (){
-    nombre = $("#rna_nombre").val();
-    paterno = $("#rna_paterno").val();
-    materno = $("#rna_materno").val();
+function checkInputsNewAlumno(){
+    if($("#rna_nombre").val() == '' || 
+    $("#rna_paterno").val() == '' || 
+    $("#rna_materno").val() == '' || 
+    $("#rna_grado").val() == '' || 
+    $("#rna_grupo").val() == '' ||
+    $('#frm_genero').val() == ''){
+        return false;
+    } else {
+        return true;
+    }
+}
 
-    if(check){
+$("#rna_clickhere").on("click", function (){
+    if(checkInputsNewAlumno()){
+        nombre = $("#rna_nombre").val();
+        paterno = $("#rna_paterno").val();
+        materno = $("#rna_materno").val();
 
         var keyuser = quitarEspacios(nombre)+"_"+paterno.charAt(0)+materno.charAt(0)+crearUUID();
-
-        $("#rna_nombre").prop("readonly",true);
-        $("#rna_paterno").prop("readonly",true);
-        $("#rna_materno").prop("readonly",true);
-        $("#rna_grado").prop("readonly",true);
-        $("#rna_grupo").prop("readonly",true);
+        $("#btn-ana-success").removeAttr("disabled");
+        $("#rna_nombre").attr("readonly",true);
+        $("#rna_paterno").attr("readonly",true);
+        $("#rna_materno").attr("readonly",true);
+        $("#rna_grado").attr("readonly",true);
+        $("#rna_grupo").attr("readonly",true);
         $("#rna_usuario").val(keyuser);
         $("#rna_password").val(keyuser);
-
-        $("#btn-ana-success").prop("disabled", false);
         alert("Guarda para continuar.");
     } else {
         alert("Completa todos los campos.");
@@ -209,34 +218,17 @@ $("#rna_clickhere").on("click", function (){
 });
 
 $("#reset-frm-na").on("click", function(){
-    $("#rna_nombre").prop("disabled",false);
-    $("#rna_paterno").prop("disabled",false);
-    $("#rna_materno").prop("disabled",false);
-    $("#rna_grado").prop("disabled",false);
-    $("#rna_grupo").prop("disabled",false);
-    clear_formNuevoAlumno();
+    $("#rna_nombre").removeAttr("readonly");
+    $("#rna_paterno").removeAttr("readonly");
+    $("#rna_materno").removeAttr("readonly");
+    $("#rna_grado").removeAttr("readonly");
+    $("#rna_grupo").removeAttr("readonly");
+    $('#form_rna').trigger('reset');
 });
 
 /*=================================================
         FUNCIONES PARA COMPONENTES GENERALES
 =================================================*/
-
-function checkCampos(obj) {
-    var camposRellenados = true;
-    obj.find(".req").each(function() {
-        var $this = $(this);
-        if( $this.val().length <= 0 ) {
-            camposRellenados = false;
-            return false;
-        }
-    });
-    if(camposRellenados == false) {
-        return false;
-    }
-    else {
-        return true;
-    }
-}
 
 function crearUUID(){
     var str = uuid.v4();
@@ -255,7 +247,6 @@ function quitarEspacios(cadena){
 function clear_form1() {document.getElementById("frm_om").reset();}
 function clear_form2() {document.getElementById("frm_rc").reset();}
 function clear_form3() {document.getElementById("frm_vf").reset();}
-function clear_formNuevoAlumno() {document.getElementById("form_rna").reset();}
 
 function checkPassReset(){
 var np  = document.getElementById("np").value;
