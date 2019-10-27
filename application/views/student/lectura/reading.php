@@ -209,32 +209,13 @@
 	<?php } ?>
 	<?php } ?>
 
-	<!-- <div class="modal fade" id="message_bot_read" tabindex="-1" role="dialog" 
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-body text-centers"  data-dismiss="modal">
-            <table width="100%">
-                <tr>
-                    <img class="bot_modal_maroon" src="<?php echo base_url(); ?>assets/img/theme/bot_level_1.png">
-                </tr>
-                <tr>
-                    <h1 class="bot_message_yellow">¡A LEER! <br> Recuerda finalizar la lectura.</h1>
-                </tr>
-            </table>
-        </div>
-    </div>
- -->
-    <script type="text/javascript">
-      $('document').ready(function(){
-        $("#message_bot_read").modal();
-      });
-    </script>
     <script src="<?php echo base_url() ?>assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets/reading/booklet/jquery.easing.1.3.js" type="text/javascript"></script>
 	<script src="<?php echo base_url(); ?>assets/reading/booklet/jquery.booklet.1.1.0.min.js" type="text/javascript"></script>
-    <script src="<?php echo base_url(); ?>assets/plugins/flipbook/js/html2canvas.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/plugins/flipbook/js/three.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/plugins/flipbook/js/pdf.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/plugins/flipbook/js/3dflipbook.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/flipbook/js/html2canvas.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/flipbook/js/three.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/flipbook/js/pdf.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/flipbook/js/3dflipbook.min.js"></script>
 	<script type="text/javascript">
 		var $mybook       = $('#mybook');
 		var $pageSelector = $('#pageSelector');
@@ -245,8 +226,8 @@
 		$bttn_prev.show();
 		$mybook.show().booklet({
 		    name:               null,                            // name of the booklet to display in the document title bar
-		    width:              850,                             // container width
-		    height:             550,                             // container height
+		    width:              800,                             // container width
+		    height:             500,                             // container height
 		    speed:              700,                             // speed of the transition between pages
 		    direction:          'LTR',                           // direction of the overall content organization, default LTR, left to right, can be RTL for languages which read right to left
 		    startingPage:       1,                               // index of the first page to be displayed

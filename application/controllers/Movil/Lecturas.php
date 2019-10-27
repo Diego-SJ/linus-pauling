@@ -76,11 +76,10 @@ class Lecturas extends CI_Controller {
                 'paginas'        => $this->Pagina_model->getPaginasLectura($id_lectura),
                 'info_file'      => $this->Fichero_model->getPdf($id_lectura) 
             );
-            $this->load->view('student/lectura/reading', $data);
+            $this->load->view('student/lectura/reading');
         } else {
             redirect(base_url()."Movil/Lecturas");
         }
-     //$this->load->view("student/lectura/index");
     }
 
     public function finishLectura($id_lectura){
