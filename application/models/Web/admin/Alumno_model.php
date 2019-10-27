@@ -18,7 +18,7 @@ class Alumno_model extends CI_Model {
         $resultado = $this->db->query('
         SELECT VW.*, CONCAT(A.nombre," ",A.a_paterno," ",A.a_materno) AS alumno, A.grado, A.grupo FROM vw_docente_aludetail_progress VW
         INNER JOIN Alumno A ON A.idAlumno = VW.idAlumno
-        ORDER BY VW.promedio DESC
+        ORDER BY VW.promedio DESC, VW.lecturas DESC
         LIMIT 20');
         return $resultado->result();
     }

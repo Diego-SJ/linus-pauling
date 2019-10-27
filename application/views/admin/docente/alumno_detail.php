@@ -59,7 +59,7 @@
                     <h3 class="profile-username text-center">Aprovechamiento</h3>
                 </div>
                 <div class="box-footer no-padding">
-                  <div class="chart" id="bar-chart" style="height: 300px; padding: 0px; position: relative;"></div>
+                  <div class="chart" id="bar-chart" style="height: 292px; padding: 0px; position: relative;"></div>
                 </div>
             </div>
           </div>

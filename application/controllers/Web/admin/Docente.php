@@ -6,7 +6,8 @@ class docente extends CI_Controller {
     public function __construct(){
         parent:: __construct();
         $this->load->model("Web/admin/Docente_model");
-        $this->load->model("Web/Alumno_model");
+        $this->load->model("Web/admin/Indicadores_model");
+        $this->load->model("Web/admin/Alumno_model");
     }
 
     public function index(){
@@ -29,7 +30,11 @@ class docente extends CI_Controller {
       if($this->session->userdata('USER_ID') != '' && $this->session->userdata('USER_TYPE') == '3') { 
 
           $data = array(
-              'alumnos' => $this->Alumno_model->getAlumnosByTeacher($id_docente)
+              'alumnos' => $this->Alumno_model->getAlumnosByTeacher($id_docente),
+              'docente' => $this->Docente_model->getInfoDocente($id_docente),
+              'total_lec' => $this->Docente_model->getTotalLecturasByTeacher($id_docente),
+              'total_alu' => $this->Docente_model->getTotalAlumnosByTeacher($id_docente),
+              'gen_score' => $this->Docente_model->getGrupalScore($id_docente),
           );
 
           $this->load->view('admin/layouts/header');
@@ -59,5 +64,48 @@ class docente extends CI_Controller {
         } else  {  
             redirect(base_url().'Welcome');  
         } 
+    }
+
+    public function getDataChart2(){
+        $idUsuario = $this->input->post("idUsuario");
+
+        $categorias = $this->Indicadores_model->getCategories();
+        $correctas  = $this->Docente_model->getCorrectsChart2($idUsuario);
+        $incorrectas = $this->Docente_model->getIncorrectsChart2($idUsuario);
+
+        $json = array();
+        $num_ac = 0;
+        $num_inc = 0;
+        foreach($categorias as $row){
+
+            foreach($correctas as $row2){
+                if($row->nombre == $row2->nombre){
+                    $num_ac = $row2->correctas;
+                } 
+            }
+
+            foreach($incorrectas as $row3){
+                if($row->nombre == $row3->nombre){
+                    $num_inc = $row3->incorrectas;
+                } 
+            }
+            
+            $data = array(
+                'idCategoria' => $row->idCategoria,
+                'categoria' => $row->nombre,
+                'correctas' => $num_ac,
+                'incorrectas' => $num_inc,
+                'percent'  => ($num_ac == 0 && $num_inc == 0)?0:round((100/($num_ac+$num_inc))*$num_ac),
+            );
+            
+            $json[] = $data;
+
+            unset($data);
+            $num_inc = 0;
+            $num_ac = 0;
+            $percent = 0;
+        }
+
+        echo json_encode($json);
     }
 }
