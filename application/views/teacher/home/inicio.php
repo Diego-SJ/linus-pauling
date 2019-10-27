@@ -15,7 +15,6 @@
     <section class="content">
         <div class="row">
           <div class="col-lg-3 col-xs-6">
-            <!-- small box -->
             <div class="small-box bg-azul">
               <div class="inner">
                 <h3>
@@ -27,7 +26,7 @@
               <div class="icon">
                 <i class="fa fa-users"></i>
               </div>
-              <a href="<?php echo site_url('Web/Alumno')?>" class="small-box-footer"> Más información <i class="fa fa-arrow-circle-right"></i></a>
+              <a class="small-box-footer"> Más información <i class="fa fa-arrow-circle-right"></i></a>
             </div>
           </div>
           
@@ -49,7 +48,6 @@
           </div>
 
           <div id="disabled-button-form-ana" class="col-lg-3 col-xs-6 reg-alumno" data-toggle="modal" data-target="#modalNewAlumno">
-            <!-- small box -->
             <div class="small-box bg-yellow">
               <div class="inner">
                 <h3>+</h3>

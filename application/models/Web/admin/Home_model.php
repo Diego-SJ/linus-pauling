@@ -2,11 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class home_model extends CI_Model {
 
-    function getAdminDashboard(){
-    	$fila = $this->db->get("vw_admin_dashboard");
-    	return $fila->row();
-    }
-
     function getTotalAlumnos(){
         $this->db->where("idEstado",1);
         $this->db->select("count(idAlumno) as total_alumno");
@@ -14,7 +9,7 @@ class home_model extends CI_Model {
         return $fila->row();
     }
       function getTotaLecturas(){
-        $this->db->where("idEstado",1);
+        $this->db->where("idEstado",2);
         $this->db->select("count(idLectura) as total_lectura");
         $fila = $this->db->get("Lectura");
         return $fila->row();

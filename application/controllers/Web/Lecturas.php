@@ -126,10 +126,11 @@ class Lecturas extends CI_Controller {
         $id_lectura = $id;
         $idEstado   = $this->input->post("status_enabled_lecture");
 
-        if($idEstado == 1)
+        if($idEstado == 1){
             $idEstado = 2;
-        else 
+        } else { 
             $idEstado = 1;
+        }
 
         $data = array ( 'idEstado' => $idEstado );
 

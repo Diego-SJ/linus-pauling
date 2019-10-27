@@ -288,6 +288,12 @@
 	border-color:#ffffff;
 }
 
+.circle-black{
+	background:#313131 !important; 
+	border-width: 3px !important; 
+	border-color:#000000 !important;
+}
+
 .circle-bot{
 	background:rgb(233, 233, 233); 
 	border-width: 3px; 

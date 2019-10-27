@@ -16,9 +16,6 @@
 
     <section class="content">
         <div id="header_lectura_detail" class="row">
-
-
-<!-- titulo lectura -->
           <div class="col-md-4">
             <div class="box box-widget widget-user-2">
               <div class="widget-user-header bg-azul">

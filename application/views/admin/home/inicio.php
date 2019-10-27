@@ -18,7 +18,7 @@
         <div class="row">
           <div class="col-lg-3 col-xs-6">
             <!-- small box -->
-            <div class="small-box bg-aqua">
+            <div class="small-box bg-azul">
               <div class="inner">
                 <h3>
                 <?php
@@ -44,7 +44,7 @@
           <!-- ./col -->
           <div class="col-lg-3 col-xs-6">
             <!-- small box -->
-            <div class="small-box bg-green">
+            <div class="small-box bg-verde">
               <div class="inner">
                 <h3>
                   <?php if(!empty($t_Lecturas)){
@@ -65,7 +65,7 @@
 
           <div class="col-lg-3 col-xs-6">
             <!-- small box -->
-            <div class="small-box bg-purple">
+            <div class="small-box bg-red">
               <div class="inner">
                 <h3>
                   <?php

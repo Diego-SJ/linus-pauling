@@ -42,7 +42,8 @@ class Lectura extends CI_Controller {
       if($this->session->userdata('USER_ID') != '' && $this->session->userdata('USER_TYPE') == '3') {  
           if($this->Lectura_model->getLectura($id_lectura) ){
               $data_detail = array(
-                  'detail_alumno_lectura' => $this->Lectura_model->detailLectura($id_lectura) 
+                'detail_lectura' => $this->Lectura_model->getLectura($id_lectura),
+                'detail_alumno_lectura' => $this->Lectura_model->detailLectura($id_lectura) 
               );
 
               $this->load->view('admin/layouts/header');

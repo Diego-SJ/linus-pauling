@@ -5,7 +5,7 @@
     <section class="content-header">
         <h1>Administrador de categorías para clasificar reactivos</h1>
         <ol class="breadcrumb">
-            <li><a href="<?php echo site_url('Web/Home')?>"><i class="fa fa-home"></i> Inicio</a></li>
+            <li><a href="<?php echo site_url('Web/admin/Home')?>"><i class="fa fa-home"></i> Inicio</a></li>
             <li class="active"><i class="fa fa-trophy text-azuld"></i> Indicadores</li>
         </ol>
     </section>

@@ -55,4 +55,54 @@ class Indicadores_model extends CI_Model {
         $result = $this->db->delete('Categorias');
         return $result;
     }
+
+    public function getCorrectsChart1($idAlumno,$idLectura){
+        $result = $this->db->query("
+                        SELECT 
+                        COUNT(AC.status) as correctas,
+                        C.nombre,
+                        AC.idCategoria
+                        FROM Answers_Categorias AC
+                        INNER JOIN Categorias C ON C.idCategoria = AC.idCategoria
+                        WHERE AC.status = 'correct' and AC.idAlumno = '".$idAlumno."' and AC.idLectura = '".$idLectura."'
+                        GROUP BY AC.idCategoria");
+        return $result->result();
+    }
+    public function getIncorrectsChart1($idAlumno,$idLectura){
+        $result = $this->db->query("
+                                SELECT 
+                                COUNT(AC.status) as incorrectas,
+                                C.nombre,
+                                AC.idCategoria
+                                FROM Answers_Categorias AC
+                                INNER JOIN Categorias C ON C.idCategoria = AC.idCategoria
+                                WHERE AC.status = 'incorrect' and AC.idAlumno = '".$idAlumno."' and AC.idLectura = '".$idLectura."'
+                                GROUP BY AC.idCategoria");
+        return $result->result();
+    }
+
+    public function getCorrectsChart2($idAlumno){
+        $result = $this->db->query("
+                        SELECT 
+                        COUNT(AC.status) as correctas,
+                        C.nombre,
+                        AC.idCategoria
+                        FROM Answers_Categorias AC
+                        INNER JOIN Categorias C ON C.idCategoria = AC.idCategoria
+                        WHERE AC.status = 'correct' and AC.idAlumno = '".$idAlumno."'
+                        GROUP BY AC.idCategoria");
+        return $result->result();
+    }
+    public function getIncorrectsChart2($idAlumno){
+        $result = $this->db->query("
+                                SELECT 
+                                COUNT(AC.status) as incorrectas,
+                                C.nombre,
+                                AC.idCategoria
+                                FROM Answers_Categorias AC
+                                INNER JOIN Categorias C ON C.idCategoria = AC.idCategoria
+                                WHERE AC.status = 'incorrect' and AC.idAlumno = '".$idAlumno."'
+                                GROUP BY AC.idCategoria");
+        return $result->result();
+    }
 }

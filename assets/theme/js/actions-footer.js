@@ -100,6 +100,44 @@ $("#tabla_alumnos_teacher_detail").DataTable({
     }
 });
 
+//ESTILO TABLA ALUMNOS ADMIN
+$("#tabla_alumnos_by_lectura_admin").DataTable({
+    "language": {
+        "lengthMenu": "Mostrar _MENU_ alumnos por pagina",
+        "zeroRecords": "No se encontraron resultados en su busqueda",
+        "searchPlaceholder": "Buscar alumno",
+        "info": "de _START_ al _END_ de un total de  _TOTAL_ alumnos",
+        "infoEmpty": "No existen registros",
+        "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+        "search": "Buscar:",
+        "paginate": {
+            "first": "Primero",
+            "last": "Último",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        },
+    }
+});
+
+//ESTILO TABLA ALUMNOS ADMIN
+$("#tabla_alumnos_admin").DataTable({
+    "language": {
+        "lengthMenu": "Mostrar _MENU_ alumnos por pagina",
+        "zeroRecords": "No se encontraron resultados en su busqueda",
+        "searchPlaceholder": "Buscar alumno",
+        "info": "de _START_ al _END_ de un total de  _TOTAL_ alumnos",
+        "infoEmpty": "No existen registros",
+        "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+        "search": "Buscar:",
+        "paginate": {
+            "first": "Primero",
+            "last": "Último",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        },
+    }
+});
+
 //ESTILO TABLA ALUMNOS
 $("#tabla_alumnos_teacher").DataTable({
     "language": {

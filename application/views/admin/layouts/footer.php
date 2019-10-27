@@ -14,6 +14,9 @@
     <script src="<?php echo base_url() ?>assets/theme/js/adminlte.min.js"></script>
     <script src="<?php echo base_url() ?>assets/theme/js/actions-footer.js"></script>
     <script src="<?php echo base_url() ?>assets/theme/js/admin-ajax.js"></script>
+    <!-- Morris -->
+    <script src="<?php echo base_url() ?>assets/raphael/raphael.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/morris.js/morris.min.js"></script>
     </body>
 
 </html>

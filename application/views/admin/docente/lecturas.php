@@ -24,7 +24,7 @@
                       <!-- /.box-header -->
                     <div class="box-body">
                         <table id="example1" class="table table-bordered table-hover">
-                            <thead class="bg-purple">
+                            <thead class="bg-azul">
                                 <tr>
                                     <th class="text-center">#</th>
                                     <th class="text-center">Titulo</th>
@@ -43,7 +43,7 @@
                                             <td class="text-center"><?php echo $lectura->autor; ?></td>
                                             <td class="text-center"><?php echo $lectura->desc_corta; ?></td>
                                             <td class="text-center">
-                                               <a href="<?php echo site_url('Web/admin/Lectura/detail');?>/<?php echo $lectura->idLectura; ?>" value="<?php echo $lectura->idLectura; ?>" class="btn btn-success btn-info-lectura">
+                                               <a href="<?php echo site_url('Web/admin/Lectura/detail');?>/<?php echo $lectura->idLectura; ?>" value="<?php echo $lectura->idLectura; ?>" class="btn bg-verde">
                                                     <span class="fa fa-eye text-white"></span>
                                                 </a>
                                             </td>

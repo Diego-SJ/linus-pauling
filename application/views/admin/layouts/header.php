@@ -15,8 +15,9 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/theme/css/skins/_all-skins.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/theme/css/custom_theme.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/datatables/css/dataTable.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/morris.js/morris.css">
 </head>
-<body class="hold-transition skin-black sidebar-mini">
+<body class="hold-transition skin-light sidebar-mini">
 
   <!-- =====================.INICIO DEL DIV QUE CONTIENE TODO ========================== -->
   <div class="wrapper">
@@ -25,13 +26,13 @@
       <!-- Logo -->
       <a href="<?php echo base_url(); ?>Web/Home" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>A</b>L</span>
+        <span class="logo-mini text-black"><b>A</b>L</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>App</b>Lecturas</span>
+        <span class="logo-lg text-black"><b>App</b>Lecturas</span>
       </a>
-      <nav class="navbar navbar-static-top">
-        <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-          <span class="sr-only">Toggle navigation</span>
+      <nav class="navbar navbar-static-top  text-black">
+        <a href="#" class="sidebar-toggle text-black" data-toggle="push-menu" role="button">
+          <span class="sr-only text-black">Toggle navigation</span>
         </a>
 
         <div class="navbar-custom-menu">
@@ -39,9 +40,9 @@
             <li class="dropdown user user-menu">
               <!------------ USER ACOUNT ----------------->
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="<?php echo base_url(); ?>assets/img/android-happy.png" class="user-image circle-white bg-navy" >
+                <img src="<?php echo base_url(); ?>assets/img/android-happy.png" class="user-image circle-dark bg-navy" >
 
-                <span class="hidden-xs">
+                <span class="hidden-xs text-black">
                   <?php 
                     if($this->session->userdata('USER_NAME') != ''){
                       echo ucwords($this->session->userdata('USER_NAME'));
@@ -55,8 +56,8 @@
               <!---------- USER ACOUNT DETAIL ------------->
               <ul class="dropdown-menu">
                 <li class="user-header">
-                  <img src="<?php echo base_url(); ?>assets/img/android-happy.png" class="img-circle circle-white" >
-                  <p>
+                  <img src="<?php echo base_url(); ?>assets/img/android-happy.png" class="img-circle circle-black" >
+                  <p class="text-black">
                     <?php 
                       if($this->session->userdata('USER_NAME') != ''){
                         echo ucwords($this->session->userdata('USER_NAME'));
@@ -112,7 +113,7 @@
         <!-- USER info -->
         <div class="user-panel treeview active">
           <div class="pull-left image">
-            <img src="<?php echo base_url(); ?>assets/img/android-happy.png" class="img-circle circle-white" >
+            <img src="<?php echo base_url(); ?>assets/img/android-happy.png" class="img-circle circle-black" >
           </div>
           <div class="pull-left info">
             <p>
@@ -129,22 +130,22 @@
         </div>
         <ul class="sidebar-menu" data-widget="tree">
           <li>
-            <a href="<?php echo base_url(); ?>Web/admin/Home">
+            <a href="<?php echo base_url(); ?>Web/admin/Home" class="text-black">
               <i class="fa fa-home"></i> <span>INICIO</span>
             </a>
           </li>
           <li>
-            <a href="<?php echo base_url(); ?>Web/admin/Docente">
+            <a href="<?php echo base_url(); ?>Web/admin/Docente" class="text-black">
               <i class="fa fa-users"></i> <span>DOCENTES</span>
             </a>
           </li>
           <li>
-            <a href="<?php echo base_url(); ?>Web/admin/Indicadores">
+            <a href="<?php echo base_url(); ?>Web/admin/Indicadores" class="text-black">
               <i class="fa fa-cogs"></i> <span>INDICADORES</span>
             </a>
           </li>
           <li>
-            <a href="<?php echo site_url('Welcome/logout');?>">
+            <a href="<?php echo site_url('Welcome/logout');?>" class="text-black">
               <i class="fa fa-sign-out"></i> <span>CERRAR SESIÓN</span>
             </a>
           </li>

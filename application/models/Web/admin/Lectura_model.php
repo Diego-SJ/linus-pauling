@@ -16,7 +16,7 @@ class lectura_model extends CI_Model {
 
     function detailLectura($id_lectura) {
         $this->db->where('idLectura', $id_lectura);
-        $resultado = $this->db->get('vw_lectura_detail');
+        $resultado = $this->db->get('vw_docente_lecdetail_tablealumnos');
         return $resultado->result();
     }
 }

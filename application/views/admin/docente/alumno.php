@@ -15,16 +15,14 @@
             <li class="active"><i class="fa fa-user"></i> Alumnos</li>
         </ol>
     </section>
-    <!--=========== Content Header (Page header) =========== -->
 
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
-                      <!-- /.box-header -->
                     <div class="box-body">
-                        <table id="tabla_alumnos" class="table table-bordered table-hover">
-                            <thead class="bg-maroon-active">
+                        <table id="tabla_alumnos_admin" class="table table-bordered table-hover">
+                            <thead class="bg-azul">
                                 <tr>
                                     <th class="text-center">#</th>
                                     <th class="text-center">Nombre</th>
@@ -45,8 +43,8 @@
                                     <td class="text-center"><?php echo $alumno->grupo; ?></td>
                                     <td class="text-center"><?php echo $alumno->usuario; ?></td>
                                     <td class="text-center">
-                                        <a href="<?php echo site_url('Web/admin/Docente/detail');?>/<?php echo $alumno->idAlumno; ?>" class="btn btn-success">
-                                            <span class="fa fa-users text-white"></span>
+                                        <a href="<?php echo site_url('Web/admin/Alumno/detail');?>/<?php echo $alumno->idAlumno; ?>" class="btn bg-verde">
+                                            <span class="fa fa-eye text-white"></span>
                                         </a>
                                     </td>
                                 </tr>

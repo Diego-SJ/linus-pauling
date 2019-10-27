@@ -5,10 +5,7 @@
 
     <!--=========== Content Header (Page header) =========== -->
     <section class="content-header">
-          <h1>
-            Panel de administración
-            <small>Docentes</small>
-        </h1>
+        <h1>Docentes registrados</h1>
         <ol class="breadcrumb">
             <li><a href="<?php echo site_url('Web/admin/Home')?>"><i class="fa fa-home"></i> Inicio</a></li>
             <li class="active"><i class="fa fa-users"></i> Docentes</li>
@@ -20,13 +17,9 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
-                    <div class="box-header bg-gray">
-                          <h3 class="box-title">Docentes registrados</h3>
-                    </div>
-                      <!-- /.box-header -->
                     <div class="box-body">
                         <table id="admin_docente" class="table table-bordered table-hover">
-                            <thead class="bg-gray">
+                            <thead class="bg-azul">
                                 <tr>
                                     <th class="text-center">ID</th>
                                     <th class="text-center">Nombre</th>
@@ -50,11 +43,11 @@
                                             <td class="text-center"><?php echo $docente->usuario; ?></td>
 
                                             <td class="text-center">
-                                                <a href="<?php echo site_url('Web/admin/lectura/lecturas_docente');?>/<?php echo $docente->idUsuario; ?>" class="btn btn-primary">
+                                                <a href="<?php echo site_url('Web/admin/lectura/lecturas_docente');?>/<?php echo $docente->idUsuario; ?>" class="btn bg-azul">
                                                     <span class="fa fa-book text-white"></span>
                                                 </a>
-                                                <a href="<?php echo site_url('Web/admin/Docente/studentsTeacher');?>/<?php echo $docente->idUsuario; ?>" value="<?php echo $docente->idUsuario; ?>" class="btn btn-success btn-info-lectura">
-                                                    <span class="fa fa-user text-white"></span>
+                                                <a href="<?php echo site_url('Web/admin/Docente/studentsTeacher');?>/<?php echo $docente->idUsuario; ?>" value="<?php echo $docente->idUsuario; ?>" class="btn bg-verde">
+                                                    <span class="fa fa-users text-white"></span>
                                                 </a>
                                             </td>
                                         </tr>
@@ -63,13 +56,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <!-- /.box-body -->
                 </div>
-        <!-- /.box -->
             </div>
-    <!-- /.col -->
         </div>
-    <!-- /.row -->
     </section>
 </div>
 
