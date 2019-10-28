@@ -22,7 +22,7 @@
             <div class="col-md-4">
                 <div class="box box-widget widget-user-2">
                     <div class="widget-user-header bg-azul">
-                        <a class="bg-maroon" href="<?php echo site_url('Web/Lecturas/detail');?>/<?php echo $detail_lectura->idLectura; ?>">
+                        <a class="bg-maroon">
                             <div  class="widget-user-image">
                                 <img class="img-circle img-thumbnail circle-blue"  
                             src="<?php echo base_url(); ?>assets/img/book-green.png" alt="User Avatar">
